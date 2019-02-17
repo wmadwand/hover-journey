@@ -11,6 +11,8 @@ public class TargetUI : MonoBehaviour
 
 	public GameObject mark;
 
+	public float dist;
+
 	Transform playerTr;
 
 	// Start is called before the first frame update
@@ -70,12 +72,7 @@ public class TargetUI : MonoBehaviour
 		Vector3 vec = Camera.main.WorldToScreenPoint(target.position);
 		mark.transform.position = vec;
 
-
-
-		//Vector3 forward = target.transform.TransformDirection(Vector3.forward);
 		Vector3 direction = target.transform.position - playerTr.position;
-
-		//var dot = Vector3.Dot(target.position, playerTr.position - target.position);
 
 		if (Vector3.Dot(playerTr.transform.forward, direction) > .5f)
 		{
@@ -86,10 +83,14 @@ public class TargetUI : MonoBehaviour
 			mark.GetComponent<RawImage>().enabled = false;
 		}
 
+		if (Vector3.Distance(target.transform.position, playerTr.position) > dist)
+		{
+			mark.GetComponent<RawImage>().CrossFadeAlpha(.2f,1,true);
+		}
+		else
+		{
+			mark.GetComponent<RawImage>().CrossFadeAlpha(1f, 1, true);
+		}
 
-		//Vector3 forward = transform.TransformDirection(Vector3.forward);
-		//Vector3 toOther = other.position - transform.position;
-
-		//if (Vector3.Dot(forward, toOther) < 0)
 	}
 }
