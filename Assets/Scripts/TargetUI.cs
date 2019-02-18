@@ -17,7 +17,7 @@ public class TargetUI : MonoBehaviour
 
 	void Start()
 	{
-		playerTr = FindObjectOfType<RigidbodyFirstPersonController>().transform;
+		playerTr = GameObject.FindWithTag("Player").transform; /*FindObjectOfType<RigidbodyFirstPersonController>().transform;*/
 
 	}
 

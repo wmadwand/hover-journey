@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5313481895594162698}
   - component: {fileID: 6340358855570266155}
   m_Layer: 5
-  m_Name: TargetUI
+  m_Name: EnemyHUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -276,6 +276,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1552855358602695390, guid: ed0426dbf6669f24e8f453d889fc2894,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed0426dbf6669f24e8f453d889fc2894, type: 3}
