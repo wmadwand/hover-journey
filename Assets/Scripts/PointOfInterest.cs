@@ -4,15 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityStandardAssets.Characters.FirstPerson;
 
-public class TargetUI : MonoBehaviour
-{
-	public RectTransform labelTr;
-	public Transform target;
-
+public class PointOfInterest : MonoBehaviour
+{	
+	public Transform targetPivotPoint;
 	public GameObject mark;
-
 	public float dist;
-
 	Transform playerTr;
 
 	void Start()
@@ -29,10 +25,10 @@ public class TargetUI : MonoBehaviour
 
 	void Rot044()
 	{
-		Vector3 vec = Camera.main.WorldToScreenPoint(target.position);
+		Vector3 vec = Camera.main.WorldToScreenPoint(targetPivotPoint.position);
 		mark.transform.position = vec;
 
-		Vector3 direction = target.transform.position - playerTr.position;
+		Vector3 direction = targetPivotPoint.transform.position - playerTr.position;
 
 		if (Vector3.Dot(playerTr.transform.forward, direction) > .5f)
 		{
@@ -44,7 +40,7 @@ public class TargetUI : MonoBehaviour
 		}
 
 		//TODO: sqrtMagnitude instead
-		if (Vector3.Distance(target.transform.position, playerTr.position) > dist)
+		if (Vector3.Distance(targetPivotPoint.transform.position, playerTr.position) > dist)
 		{
 			mark.GetComponent<CanvasGroup>().alpha = .3f;
 		}

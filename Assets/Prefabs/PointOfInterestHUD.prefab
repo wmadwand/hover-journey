@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 1525466673963962821}
   - component: {fileID: 1552855358602695390}
   - component: {fileID: 4886251289179620369}
+  - component: {fileID: 3949896729131678652}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: PointOfInterestHUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37,7 +38,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1525466673963962821
 CanvasRenderer:
@@ -85,9 +86,24 @@ CanvasGroup:
   m_GameObject: {fileID: 3949896729131678651}
   m_Enabled: 1
   m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
+--- !u!114 &3949896729131678652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3949896729131678651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11bf76f0273c7614fa52c2e56a9da460, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPivotPoint: {fileID: 0}
+  mark: {fileID: 3949896729131678651}
+  dist: 15
 --- !u!1 &4048822327414933824
 GameObject:
   m_ObjectHideFlags: 0
