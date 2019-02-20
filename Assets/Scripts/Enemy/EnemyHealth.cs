@@ -6,11 +6,10 @@ public class EnemyHealth : MonoBehaviour
 {
 	public int value = 100;
 
-	public void TakeDamage()
+	public void GetDamage(int value)
 	{
-
+		Remove(value);
 	}
-
 
 	//TODO: move to Enemy, add event
 	private void OnTriggerEnter(Collider other)
@@ -36,5 +35,11 @@ public class EnemyHealth : MonoBehaviour
 		this.value -= value;
 	}
 
-
+	private void Update()
+	{
+		if (value <= 0)
+		{
+			Destroy(gameObject);
+		}
+	}
 }

@@ -4,15 +4,27 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	public int value = 100;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	public void GetDamage(int value)
+	{
+		Remove(value);
+	}
+
+	public void Add(int value)
+	{
+		this.value += value;
+	}
+
+	public void Remove(int value)
+	{
+		if (value <= 0)
+		{
+			return;
+		}
+
+		this.value -= value;
+
+		Debug.Log($"Player health {this.value}");
+	}
 }

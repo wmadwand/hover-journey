@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class EnemyAttack : MonoBehaviour
 {
 	[SerializeField] private GameObject _projectile;
@@ -16,13 +18,22 @@ public class EnemyAttack : MonoBehaviour
 
 	float enemyHealth = 100;
 
+	WeaponController weaponController;
+
+	private void Awake()
+	{
+		weaponController = GetComponent<WeaponController>();
+	}
+
 	private void Update()
 	{
+		CheckForPlayer();
+
 		if (Time.time > nextShotTime && playerInRange && enemyHealth > 0)
 		{
 			nextShotTime = Time.time + timeBetweenShots;
 
-			Fire();
+			weaponController.Fire(transform.forward);
 		}
 
 	}
@@ -38,46 +49,22 @@ public class EnemyAttack : MonoBehaviour
 	void CheckForPlayer()
 	{
 		Vector3 direction = GameObject.FindGameObjectWithTag("Player").transform.position - transform.position;
-		float isPlayerInRangeAngle = Vector3.Dot(direction, transform.forward);
+		float isPlayerInRangeAngle = Vector3.Dot(transform.forward, direction);
 
-		if (Vector3.Dot(direction, transform.forward) > .25f)
+		if (isPlayerInRangeAngle > .25f)
 		{
 			if (Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) <= 10)
 			{
 				playerInRange = true;
+			}
+			else
+			{
+				playerInRange = false;
 			}
 		}
 		else
 		{
 			playerInRange = false;
 		}
-	}
-
-	//private void OnTriggerEnter(Collider other)
-	//{
-	//	if (other.gameObject.tag == "Player")
-	//	{
-	//		playerInRange = true;
-	//	}
-	//}
-
-	//private void OnTriggerExit(Collider other)
-	//{
-	//	if (other.gameObject.tag == "Player")
-	//	{
-	//		playerInRange = false;
-	//	}
-
-	//}
-
-	void Fire()
-	{
-
-		Instantiate(_projectile, _shotSpawn.position, Quaternion.identity);
-
-		//TODO: set fireDirection vector3, projectileSpeed
-
-		//theProjectile.LookAt(theProjectile.position + fireDirection);
-		//theProjectile.rigidbody.velocity = fireDirection * projectileSpeed;
 	}
 }
