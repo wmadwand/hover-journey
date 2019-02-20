@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class MissileMovement : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+	public float speed;
+
+
+
+	private void Awake()
+	{
+		
+	}
+
+	void Start()
     {
-        
-    }
+		GetComponent<Rigidbody>().velocity = transform.forward * speed;
+	}
+
+
+
+
 }

@@ -21,6 +21,11 @@ public class EnemyAttack : MonoBehaviour
 
 	void Fire()
 	{
-		Instantiate(_missile, _shotSpawn.position, _shotSpawn.rotation);		
+		Instantiate(_missile, _shotSpawn.position, Quaternion.identity);
+
+		//TODO: set fireDirection vector3, projectileSpeed
+
+		//theProjectile.LookAt(theProjectile.position + fireDirection);
+		//theProjectile.rigidbody.velocity = fireDirection * projectileSpeed;
 	}
 }
