@@ -28,11 +28,14 @@ public class PointOfInterest : MonoBehaviour
 	void Update()
 	{
 
-		Rot044();
+		UpdateState();
 	}
 
-	void Init()
+	public void Init(Transform targetPivotPoint, Transform indicatorPivotPoint)
 	{
+		this.targetPivotPoint = targetPivotPoint;
+		this.indicatorPivotPoint = indicatorPivotPoint;
+
 		//SetText();
 		//SetColor();
 	}
@@ -47,7 +50,7 @@ public class PointOfInterest : MonoBehaviour
 		bacground.color = value;
 	}
 
-	void Rot044()
+	void UpdateState()
 	{
 		Vector3 vec = Camera.main.WorldToScreenPoint(targetPivotPoint.position);
 		mark.transform.Find("ImagePOI").transform.position = vec;

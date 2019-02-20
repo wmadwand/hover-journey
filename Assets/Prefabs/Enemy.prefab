@@ -158,7 +158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ad10e44e03a19646a7cd1666c6e5034, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 20
+  value: 30
 --- !u!114 &6365964503169058451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,6 +171,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ca77755b2393449ac00d01bea2dad4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetPivotPoint: {fileID: 8778249889199799873}
+  indicatorPivotPoint: {fileID: 8739382567154711836}
 --- !u!114 &4510100618132753093
 MonoBehaviour:
   m_ObjectHideFlags: 0

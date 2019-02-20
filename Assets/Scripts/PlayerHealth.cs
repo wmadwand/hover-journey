@@ -1,14 +1,18 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
+	public static event Action<int> OnPlayerDamaged;
+
 	public int value = 100;
 
-	public void GetDamage(int value)
+	public void GetDamage(int valueDamage)
 	{
-		Remove(value);
+		Remove(valueDamage);
+		OnPlayerDamaged?.Invoke(valueDamage);
 	}
 
 	public void Add(int value)
@@ -16,14 +20,14 @@ public class PlayerHealth : MonoBehaviour
 		this.value += value;
 	}
 
-	public void Remove(int value)
+	public void Remove(int valueDamage)
 	{
-		if (value <= 0)
+		if (valueDamage <= 0)
 		{
 			return;
 		}
 
-		this.value -= value;
+		this.value -= valueDamage;
 
 		Debug.Log($"Player health {this.value}");
 	}
