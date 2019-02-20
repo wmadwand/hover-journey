@@ -1181,7 +1181,7 @@ MonoBehaviour:
   spawnPosOffset: {x: 0, y: 0, z: 0}
   forwardOffset: 0
   reloadTime: 0.2
-  projectileSpeed: 50
+  projectileSpeed: 3
 --- !u!1 &948835973
 GameObject:
   m_ObjectHideFlags: 0

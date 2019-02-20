@@ -173,6 +173,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetPivotPoint: {fileID: 8778249889199799873}
   indicatorPivotPoint: {fileID: 8739382567154711836}
+  poiGO: {fileID: 0}
 --- !u!114 &4510100618132753093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,7 +242,7 @@ MonoBehaviour:
   spawnPosOffset: {x: 0, y: 0, z: 0}
   forwardOffset: 0
   reloadTime: 0.2
-  projectileSpeed: 10
+  projectileSpeed: 2.5
 --- !u!1 &4041902483999974725
 GameObject:
   m_ObjectHideFlags: 0
