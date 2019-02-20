@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MissileMovement : MonoBehaviour
+public class ProjectileMovement : MonoBehaviour
 {
 
 	public float speed;

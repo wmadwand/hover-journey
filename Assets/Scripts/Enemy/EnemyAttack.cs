@@ -27,22 +27,48 @@ public class EnemyAttack : MonoBehaviour
 
 	}
 
-	private void OnTriggerEnter(Collider other)
+#if UNITY_EDITOR
+	private void OnDrawGizmos()
 	{
-		if (other.gameObject.tag == "Player")
-		{
-			playerInRange = true;
-		}
+		Gizmos.color = Color.red;
+		Gizmos.DrawLine(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position);
 	}
+#endif
 
-	private void OnTriggerExit(Collider other)
+	void CheckForPlayer()
 	{
-		if (other.gameObject.tag == "Player")
+		Vector3 direction = GameObject.FindGameObjectWithTag("Player").transform.position - transform.position;
+		float isPlayerInRangeAngle = Vector3.Dot(direction, transform.forward);
+
+		if (Vector3.Dot(direction, transform.forward) > .25f)
+		{
+			if (Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) <= 10)
+			{
+				playerInRange = true;
+			}
+		}
+		else
 		{
 			playerInRange = false;
 		}
-
 	}
+
+	//private void OnTriggerEnter(Collider other)
+	//{
+	//	if (other.gameObject.tag == "Player")
+	//	{
+	//		playerInRange = true;
+	//	}
+	//}
+
+	//private void OnTriggerExit(Collider other)
+	//{
+	//	if (other.gameObject.tag == "Player")
+	//	{
+	//		playerInRange = false;
+	//	}
+
+	//}
 
 	void Fire()
 	{
