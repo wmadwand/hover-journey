@@ -4,24 +4,50 @@ using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
 {
-	[SerializeField] private GameObject _missile;
+	[SerializeField] private GameObject _projectile;
 	[SerializeField] private Transform _shotSpawn;
 	[SerializeField] private float _shotWait;
 	[SerializeField] private float _delay;
 
-	private void OnEnable()
+	bool playerInRange;
+
+	float nextShotTime;
+	float timeBetweenShots = 3f;
+
+	float enemyHealth = 100;
+
+	private void Update()
 	{
-		InvokeRepeating("Fire", Random.Range(1, _delay), Random.Range(1.5f, _shotWait));
+		if (Time.time > nextShotTime && playerInRange && enemyHealth > 0)
+		{
+			nextShotTime = Time.time + timeBetweenShots;
+
+			Fire();
+		}
+
 	}
 
-	private void OnDisable()
+	private void OnTriggerEnter(Collider other)
 	{
-		CancelInvoke("Fire");
+		if (other.gameObject.tag == "Player")
+		{
+			playerInRange = true;
+		}
+	}
+
+	private void OnTriggerExit(Collider other)
+	{
+		if (other.gameObject.tag == "Player")
+		{
+			playerInRange = false;
+		}
+
 	}
 
 	void Fire()
 	{
-		Instantiate(_missile, _shotSpawn.position, Quaternion.identity);
+
+		Instantiate(_projectile, _shotSpawn.position, Quaternion.identity);
 
 		//TODO: set fireDirection vector3, projectileSpeed
 
