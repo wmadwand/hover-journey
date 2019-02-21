@@ -12,7 +12,7 @@ public class ObjectOutline : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
 	public void OnPointerEnter(PointerEventData eventData)
 	{
-		_material.SetFloat("_OutlineVal", .1f);
+		_material.SetFloat("_OutlineVal", .2f);
 
 		Debug.Log("Enter");
 	}

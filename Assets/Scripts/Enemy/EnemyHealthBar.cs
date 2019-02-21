@@ -1,41 +1,40 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class EnemyHealthBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class EnemyHealthBar : MonoBehaviour
 {
 	public Transform indicatorPivotPoint;
-	public GameObject aimPic;
+	public Image green;
+	public GameObject bar;
+
+	public float healthValue;
 
 	void Start()
 	{
-		aimPic.SetActive(false);
+		bar.SetActive(false);
 	}
 
-	public void OnPointerEnter(PointerEventData eventData)
+	public void SetVisible(bool value)
 	{
-		aimPic.SetActive(true);
-
-		Debug.Log("Enter");
+		bar.SetActive(value);
 	}
 
-	public void OnPointerExit(PointerEventData eventData)
+	void ChangeHealthAmount()
 	{
-		aimPic.SetActive(false);
-
-
-		Debug.Log("Exit");
+		green.fillAmount = Mathf.Lerp(green.fillAmount, healthValue / 100, Time.deltaTime);
 	}
 
-
-	// Update is called once per frame
 	void Update()
 	{
+		ChangeHealthAmount();
+
 		UpdateHealthBarPosition();
 	}
 
 	void UpdateHealthBarPosition()
 	{
 		Vector3 vec2 = Camera.main.WorldToScreenPoint(indicatorPivotPoint.position);
-		aimPic.transform.position = vec2;
+		bar.transform.position = vec2;
 	}
 }
