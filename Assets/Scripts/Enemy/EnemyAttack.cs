@@ -5,7 +5,7 @@ public class EnemyAttack : MonoBehaviour
 {
 	private bool _isPlayerInRange;
 	private float _nextShotTime;
-	private float _timeBetweenShots = 3f;
+	public float _timeBetweenShots = 1.5f;
 
 	private WeaponController _weaponController;
 
