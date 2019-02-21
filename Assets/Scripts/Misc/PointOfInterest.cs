@@ -1,83 +1,67 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.EventSystems;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityStandardAssets.Characters.FirstPerson;
 
 public class PointOfInterest : MonoBehaviour
-{	
-	public Transform targetPivotPoint;
-	public Transform indicatorPivotPoint;
-	GameObject mark;
+{
+	[SerializeField] private Transform _targetPivotPoint;
+	[SerializeField] private Image _background;
+	[SerializeField] private Text _text;
+
+	[SerializeField] private GameObject _imagePOI;
+
+	private GameObject mark;
 	public float dist;
+
+	const float FIELD_VIEW_VALUE = .5f;
+
 	Transform playerTr;
-	public Image bacground;
-	public Text text;
 
-	public GameObject aimPic;
+	//--------------------------------------------------------
 
-	void Start()
+	public void Init(Transform targetPivotPoint)
 	{
-		playerTr = GameObject.FindWithTag("Player").transform; /*FindObjectOfType<RigidbodyFirstPersonController>().transform;*/
-		mark = this.gameObject;
+		this._targetPivotPoint = targetPivotPoint;
 
-		aimPic.SetActive(false);
-	}
-
-	void Update()
-	{
-
-		UpdateState();
-	}
-
-	public void Init(Transform targetPivotPoint, Transform indicatorPivotPoint)
-	{
-		this.targetPivotPoint = targetPivotPoint;
-		this.indicatorPivotPoint = indicatorPivotPoint;
-
+		playerTr = Game.Instance.Player.transform;
 		//SetText();
 		//SetColor();
 	}
 
 	public void SetText(string value)
 	{
-		text.text = value;
+		_text.text = value;
 	}
 
 	public void SetColor(Color value)
 	{
-		bacground.color = value;
+		_background.color = value;
 	}
 
-	void UpdateState()
+	//--------------------------------------------------------
+
+	private void Start()
 	{
-		Vector3 vec = Camera.main.WorldToScreenPoint(targetPivotPoint.position);
-		mark.transform.Find("ImagePOI").transform.position = vec;
+		mark = this.gameObject;
+	}
 
-		Vector3 direction = targetPivotPoint.transform.position - playerTr.position;
+	private void Update()
+	{
 
-		if (Vector3.Dot(playerTr.transform.forward, direction) > .5f)
-		{
-			mark.transform.Find("ImagePOI").gameObject.SetActive(true);
-		}
-		else
-		{
-			mark.transform.Find("ImagePOI").gameObject.SetActive(false);
-		}
+		UpdateState();
+	}
+
+	private void UpdateState()
+	{
+		Vector3 vec = Camera.main.WorldToScreenPoint(_targetPivotPoint.position);
+		_imagePOI.transform.position = vec;
+
+		Vector3 direction = _targetPivotPoint.transform.position - playerTr.position;
+		float dotValue = Vector3.Dot(playerTr.forward, direction);
+
+		_imagePOI.SetActive(dotValue > FIELD_VIEW_VALUE ? true : false);
 
 		//TODO: sqrtMagnitude instead
-		if (Vector3.Distance(targetPivotPoint.transform.position, playerTr.position) > dist)
-		{
-			mark.GetComponent<CanvasGroup>().alpha = .3f;
-		}
-		else
-		{
-			mark.GetComponent<CanvasGroup>().alpha = 1f;
-		}
-
-		Vector3 vec2 = Camera.main.WorldToScreenPoint(indicatorPivotPoint.position);
-		aimPic.transform.position = vec2;
-
+		float distance = Vector3.Distance(_targetPivotPoint.transform.position, playerTr.position);
+		mark.GetComponent<CanvasGroup>().alpha = distance > dist ? .3f : 1f;
 	}
 }

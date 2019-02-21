@@ -3,12 +3,9 @@
 public class ObjectHealth : MonoBehaviour
 {
 	public int Value => _value;
-
-	[SerializeField] private int _value = 100;
-
 	public bool IsAlive => _value > 0;
 
-	bool isDead;
+	[SerializeField] private int _value = 100;
 
 	//--------------------------------------------------------
 

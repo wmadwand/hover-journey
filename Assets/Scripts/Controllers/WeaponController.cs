@@ -22,7 +22,7 @@ public class WeaponController : MonoBehaviour
 	public int ammo = 100;
 	public int maxAmmo = 100;
 
-	public Collider parentCollider;
+	private Collider parentCollider;
 
 	[System.NonSerialized]
 	public Transform theProjectile;

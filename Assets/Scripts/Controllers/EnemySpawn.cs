@@ -1,29 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Zenject;
+﻿using UnityEngine;
 
 public class EnemySpawn : MonoBehaviour
 {
-	public Transform[] spawnPoints;
-	public GameObject enemyPrefab;
-	public GameObject enemyPOIPrefab;
+	[SerializeField] private Transform[] _spawnPoints;
+	[SerializeField] private GameObject _enemyPrefab;
+	[SerializeField] private GameObject _enemyPoiPrefab;
+
+	private GameObject _theEnemy;
 
 	public void Execute()
 	{
-		foreach (var item in spawnPoints)
+		foreach (var item in _spawnPoints)
 		{
-			GameObject theEnemy = Instantiate(enemyPrefab, item.position, item.rotation);
-
-			GameObject theEnemyPOI = Instantiate(enemyPOIPrefab, Game.Instance.canvasTr);
-
-			Enemy enm = theEnemy.GetComponent<Enemy>();
-			EnemyHighlighter enmHIgh = theEnemy.GetComponent<EnemyHighlighter>();
-			PointOfInterest poi = theEnemyPOI.GetComponent<PointOfInterest>();
-
-			enm.poiGO = theEnemyPOI;
-			poi.Init(enm.targetPivotPoint, enm.indicatorPivotPoint);
-			enmHIgh.pointOfInterest = poi;
+			_theEnemy = Instantiate(_enemyPrefab, item.position, item.rotation);
+			
 		}
 
 	}
