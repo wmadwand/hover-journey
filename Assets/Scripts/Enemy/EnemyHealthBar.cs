@@ -22,7 +22,7 @@ public class EnemyHealthBar : MonoBehaviour
 
 	public void UpdateState(int value)
 	{
-		green.fillAmount = Mathf.Lerp(green.fillAmount, value / 100, Time.deltaTime);
+		green.fillAmount = value * .01f; /* Mathf.Lerp(green.fillAmount, value * .01f, Time.deltaTime);*/
 	}
 
 	//--------------------------------------------------------
