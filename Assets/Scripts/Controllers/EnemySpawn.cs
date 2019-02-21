@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class EnemySpawn : MonoBehaviour
 {
@@ -24,6 +25,6 @@ public class EnemySpawn : MonoBehaviour
 			poi.Init(enm.targetPivotPoint, enm.indicatorPivotPoint);
 			enmHIgh.pointOfInterest = poi;
 		}
-		
+
 	}
 }
