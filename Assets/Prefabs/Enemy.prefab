@@ -110,6 +110,7 @@ GameObject:
   - component: {fileID: 1071776981462136581}
   - component: {fileID: 254467977}
   - component: {fileID: 3132711078913889967}
+  - component: {fileID: 2735407567240077921}
   m_Layer: 9
   m_Name: Enemy
   m_TagString: Untagged
@@ -171,9 +172,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ca77755b2393449ac00d01bea2dad4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetPivotPoint: {fileID: 8778249889199799873}
-  indicatorPivotPoint: {fileID: 8739382567154711836}
-  poiGO: {fileID: 0}
+  _targetPivotPoint: {fileID: 0}
+  _indicatorPivotPoint: {fileID: 0}
+  _poiGo: {fileID: 0}
+  _enemyPoiPrefab: {fileID: 0}
+  _enemyHealthBarPref: {fileID: 0}
 --- !u!114 &4510100618132753093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,7 +201,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c022cddf3ca924e4597a3a079fcd169d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointOfInterest: {fileID: 0}
 --- !u!54 &254467977
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -237,6 +239,18 @@ MonoBehaviour:
   forwardOffset: 0
   reloadTime: 0.2
   projectileSpeed: 2.5
+--- !u!114 &2735407567240077921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3317057338954056275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c022cddf3ca924e4597a3a079fcd169d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4041902483999974725
 GameObject:
   m_ObjectHideFlags: 0
