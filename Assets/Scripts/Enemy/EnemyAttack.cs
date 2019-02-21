@@ -1,70 +1,65 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-
+﻿using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
 {
-	[SerializeField] private GameObject _projectile;
-	[SerializeField] private Transform _shotSpawn;
-	[SerializeField] private float _shotWait;
-	[SerializeField] private float _delay;
+	private bool _isPlayerInRange;
+	private float _nextShotTime;
+	private float _timeBetweenShots = 3f;
 
-	bool playerInRange;
+	private WeaponController _weaponController;
 
-	float nextShotTime;
-	float timeBetweenShots = 3f;
+	const float ATTACK_DISTANCE = 10;
+	const float FIELD_VIEW_VALUE = .25f;
 
-	float enemyHealth = 100;
+	GameObject playerGo;
 
-	WeaponController weaponController;
+	//--------------------------------------------------------
 
-	private void Awake()
-	{
-		weaponController = GetComponent<WeaponController>();
-	}
-
-	private void Update()
-	{
-		CheckForPlayer();
-
-		if (Time.time > nextShotTime && playerInRange && enemyHealth > 0)
-		{
-			nextShotTime = Time.time + timeBetweenShots;
-
-			weaponController.Fire(transform.forward);
-		}
-
-	}
-
+	#region Debug
 #if UNITY_EDITOR
 	private void OnDrawGizmos()
 	{
 		Gizmos.color = Color.red;
-		Gizmos.DrawLine(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position);
+		Gizmos.DrawLine(transform.position, playerGo.transform.position);
 	}
 #endif
+	#endregion
 
-	void CheckForPlayer()
+	private void Awake()
 	{
-		Vector3 direction = GameObject.FindGameObjectWithTag("Player").transform.position - transform.position;
+		_weaponController = GetComponent<WeaponController>();
+
+		//TODO: get rid of it
+		playerGo = GameObject.FindGameObjectWithTag("Player");
+	}
+
+	private void Update()
+	{
+		CheckForPlayerInRange();
+
+		if (Time.time > _nextShotTime && _isPlayerInRange && playerGo.GetComponent<PlayerHealth>().IsAlive)
+		{
+			_nextShotTime = Time.time + _timeBetweenShots;
+
+			_weaponController.Fire(transform.forward);
+		}
+	}
+
+	private void CheckForPlayerInRange()
+	{
+		_isPlayerInRange = false;
+
+		//TODO: replace with Physics.OverlapSphere or just put a coliider !!!
+		Vector3 direction = playerGo.transform.position - transform.position;
 		float isPlayerInRangeAngle = Vector3.Dot(transform.forward, direction);
 
-		if (isPlayerInRangeAngle > .25f)
+		if (isPlayerInRangeAngle > FIELD_VIEW_VALUE)
 		{
-			if (Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) <= 10)
+			//TODO: sqrMagnitude or collider
+			if (Vector3.Distance(transform.position, playerGo.transform.position) <= ATTACK_DISTANCE)
 			{
-				playerInRange = true;
+				_isPlayerInRange = true;
 			}
-			else
-			{
-				playerInRange = false;
-			}
-		}
-		else
-		{
-			playerInRange = false;
 		}
 	}
 }

@@ -51,6 +51,11 @@ public class ProjectileAttack : MonoBehaviour
 
 			Destroy(gameObject);
 		}
+	}	
+
+	private void CreateExplosion()
+	{
+
 	}
 
 	private void FixedUpdate()
