@@ -10,10 +10,19 @@ public class EnemyHealthBar : MonoBehaviour
 
 	public float healthValue;
 
+	//--------------------------------------------------------
+
+	public void Init(Transform indicatorPivotPoint)
+	{
+		this.indicatorPivotPoint = indicatorPivotPoint;
+	}
+
 	void Start()
 	{
 		bar.SetActive(false);
 	}
+
+	//--------------------------------------------------------
 
 	public void SetVisible(bool value)
 	{

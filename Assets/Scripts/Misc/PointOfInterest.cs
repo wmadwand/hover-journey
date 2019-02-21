@@ -3,11 +3,11 @@ using UnityEngine.UI;
 
 public class PointOfInterest : MonoBehaviour
 {
-	[SerializeField] private Transform _targetPivotPoint;
+	[SerializeField] private Transform _markPoint;
 	[SerializeField] private Image _background;
 	[SerializeField] private Text _text;
 
-	[SerializeField] private GameObject _imagePOI;
+	[SerializeField] private GameObject _view;
 
 	private GameObject mark;
 	public float dist;
@@ -20,7 +20,7 @@ public class PointOfInterest : MonoBehaviour
 
 	public void Init(Transform targetPivotPoint)
 	{
-		this._targetPivotPoint = targetPivotPoint;
+		this._markPoint = targetPivotPoint;
 
 		playerTr = Game.Instance.Player.transform;
 		//SetText();
@@ -52,16 +52,16 @@ public class PointOfInterest : MonoBehaviour
 
 	private void UpdateState()
 	{
-		Vector3 vec = Camera.main.WorldToScreenPoint(_targetPivotPoint.position);
-		_imagePOI.transform.position = vec;
+		Vector3 vec = Camera.main.WorldToScreenPoint(_markPoint.position);
+		_view.transform.position = vec;
 
-		Vector3 direction = _targetPivotPoint.transform.position - playerTr.position;
+		Vector3 direction = _markPoint.transform.position - playerTr.position;
 		float dotValue = Vector3.Dot(playerTr.forward, direction);
 
-		_imagePOI.SetActive(dotValue > FIELD_VIEW_VALUE ? true : false);
+		_view.SetActive(dotValue > FIELD_VIEW_VALUE ? true : false);
 
 		//TODO: sqrtMagnitude instead
-		float distance = Vector3.Distance(_targetPivotPoint.transform.position, playerTr.position);
+		float distance = Vector3.Distance(_markPoint.transform.position, playerTr.position);
 		mark.GetComponent<CanvasGroup>().alpha = distance > dist ? .3f : 1f;
 	}
 }

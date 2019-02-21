@@ -7,12 +7,15 @@ public class ObjectOutline : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
 	private void Awake()
 	{
-		_material = GetComponent<MeshRenderer>().material;
+		_material = GetComponentInChildren<MeshRenderer>().material;
+
 	}
 
 	public void OnPointerEnter(PointerEventData eventData)
 	{
 		_material.SetFloat("_OutlineVal", .2f);
+
+		GetComponent<Enemy>().healthBar.SetVisible(true);
 
 		Debug.Log("Enter");
 	}
@@ -20,6 +23,8 @@ public class ObjectOutline : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 	public void OnPointerExit(PointerEventData eventData)
 	{
 		_material.SetFloat("_OutlineVal", 0);
+
+		GetComponent<Enemy>().healthBar.SetVisible(false);
 
 		Debug.Log("Exit");
 	}

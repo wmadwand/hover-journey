@@ -11,7 +11,7 @@ public class EnemyAttack : MonoBehaviour
 	const float ATTACK_DISTANCE = 10;
 	const float FIELD_VIEW_VALUE = .25f;
 
-	GameObject playerGo;
+	private GameObject _player;
 
 	//--------------------------------------------------------
 
@@ -20,7 +20,7 @@ public class EnemyAttack : MonoBehaviour
 	private void OnDrawGizmos()
 	{
 		Gizmos.color = Color.red;
-		Gizmos.DrawLine(transform.position, playerGo.transform.position);
+		Gizmos.DrawLine(transform.position, _player.transform.position);
 	}
 #endif
 	#endregion
@@ -28,16 +28,14 @@ public class EnemyAttack : MonoBehaviour
 	private void Awake()
 	{
 		_weaponController = GetComponent<WeaponController>();
-
-		//TODO: get rid of it
-		playerGo = GameObject.FindGameObjectWithTag("Player");
+	
 	}
 
 	private void Update()
 	{
 		CheckForPlayerInRange();
 
-		if (Time.time > _nextShotTime && _isPlayerInRange && playerGo.GetComponent<PlayerHealth>().IsAlive)
+		if (Time.time > _nextShotTime && _isPlayerInRange && _player.GetComponent<PlayerHealth>().IsAlive)
 		{
 			_nextShotTime = Time.time + _timeBetweenShots;
 
@@ -50,13 +48,13 @@ public class EnemyAttack : MonoBehaviour
 		_isPlayerInRange = false;
 
 		//TODO: replace with Physics.OverlapSphere or just put a coliider !!!
-		Vector3 direction = playerGo.transform.position - transform.position;
+		Vector3 direction = _player.transform.position - transform.position;
 		float isPlayerInRangeAngle = Vector3.Dot(transform.forward, direction);
 
 		if (isPlayerInRangeAngle > FIELD_VIEW_VALUE)
 		{
 			//TODO: sqrMagnitude or collider
-			if (Vector3.Distance(transform.position, playerGo.transform.position) <= ATTACK_DISTANCE)
+			if (Vector3.Distance(transform.position, _player.transform.position) <= ATTACK_DISTANCE)
 			{
 				_isPlayerInRange = true;
 			}
