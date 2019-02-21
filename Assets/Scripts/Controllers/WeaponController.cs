@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
@@ -10,14 +8,14 @@ public class WeaponController : MonoBehaviour
 	public Transform _shotSpawn;
 
 
-	GameObject _theProjectileGO;
-	bool isInfiniteAmmo;
+	private GameObject _theProjectileGO;
+	private bool isInfiniteAmmo;
 
-	Transform myTransform;
+	private Transform myTransform;
 
-	int myLayer;
+	private int myLayer;
 
-	Projectile theProjectileController;
+	private Projectile theProjectileController;
 
 	public int ammo = 100;
 	public int maxAmmo = 100;
@@ -27,41 +25,29 @@ public class WeaponController : MonoBehaviour
 	[System.NonSerialized]
 	public Transform theProjectile;
 
-	public Vector3 spawnPosOffset;
-	public float forwardOffset = 1.5f;
-	public float reloadTime = 0.2f;
 	public float projectileSpeed = 10f;
 
-	private void Start()
-	{
-		Init();
-	}
+	//--------------------------------------------------------	
 
 	public virtual void Init()
 	{
 		myTransform = transform;
 		myLayer = gameObject.layer;
-		// load the weapon
+
 		//Reloaded();
 
 		SetCollider(GetComponent<Collider>());
 	}
 
-	public virtual void Fire(Vector3 aDirection/*, int ownerID*/)
+	public virtual void Fire(Vector3 direction/*, int ownerID*/)
 	{
-		//if (!canFire)
-		//	return;
-		//if (!isLoaded)
-		//	return;
 		if (ammo <= 0 && !isInfiniteAmmo)
+		{
 			return;
+		}
+
 		ammo--;
-
-		FireProjectile(aDirection, this.ownerID);
-		//isLoaded = false;
-
-		//CancelInvoke("Reloaded");
-		//Invoke("Reloaded", reloadTime);
+		FireProjectile(direction, this.ownerID);
 	}
 
 	public virtual void FireProjectile(Vector3 fireDirection, int ownerID)
@@ -79,7 +65,7 @@ public class WeaponController : MonoBehaviour
 
 	public virtual Transform MakeProjectile(int ownerID)
 	{
-		theProjectile = Instantiate(_projectileGO, _shotSpawn.position, /*myTransform.position + spawnPosOffset + (myTransform.forward * forwardOffset)*/ myTransform.rotation).transform;
+		theProjectile = Instantiate(_projectileGO, _shotSpawn.position, myTransform.rotation).transform;
 		_theProjectileGO = theProjectile.gameObject;
 		_theProjectileGO.layer = myLayer;
 
@@ -94,5 +80,12 @@ public class WeaponController : MonoBehaviour
 		}
 
 		return theProjectile;
+	}
+
+	//--------------------------------------------------------
+
+	private void Start()
+	{
+		Init();
 	}
 }

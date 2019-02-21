@@ -1,32 +1,37 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+[RequireComponent(typeof(WeaponController))]
 public class PlayerAttack : MonoBehaviour
 {
-	public float nextShot;
-	public float timeBetweenAttacks;
-	bool enemyInRange = true;
-	float enemyHealth = 10;
+	[SerializeField] private float _timeBetweenAttacks;
 
-	WeaponController weaponController;
+	private float _nextShot;
+	private WeaponController _weaponController;
+
+	//TODO: bear in mind the attack range
+	private bool _enemyInRange = true;
+	private float _enemyHealth = 10;
+
+	private Ray _ray;
+	RaycastHit _hit;
+
+	//--------------------------------------------------------
 
 	private void Awake()
 	{
-		weaponController = GetComponent<WeaponController>();
+		_weaponController = GetComponent<WeaponController>();
 	}
 
 	private void Update()
 	{
-		if (Input.GetButton("Fire1") && Time.time > nextShot && enemyInRange && enemyHealth > 0)
+		if (Input.GetButton("Fire1") && Time.time > _nextShot && _enemyInRange && _enemyHealth > 0)
 		{
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			RaycastHit hit;
+			_ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-			if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << LayerMask.NameToLayer("Shootable")))
+			if (Physics.Raycast(_ray, out _hit, Mathf.Infinity, 1 << LayerMask.NameToLayer("Shootable")))
 			{
-				nextShot = Time.time + timeBetweenAttacks;
-				weaponController.Fire(hit.point - transform.position);
+				_nextShot = Time.time + _timeBetweenAttacks;
+				_weaponController.Fire(_hit.point - transform.position);
 			}
 		}
 	}

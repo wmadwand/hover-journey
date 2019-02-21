@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(WeaponController))]
 public class EnemyAttack : MonoBehaviour
 {
 	private bool _isPlayerInRange;
@@ -28,7 +29,7 @@ public class EnemyAttack : MonoBehaviour
 	private void Awake()
 	{
 		_weaponController = GetComponent<WeaponController>();
-	
+		_player = Game.Instance.Player;
 	}
 
 	private void Update()
@@ -39,7 +40,7 @@ public class EnemyAttack : MonoBehaviour
 		{
 			_nextShotTime = Time.time + _timeBetweenShots;
 
-			_weaponController.Fire(transform.forward);
+			_weaponController.Fire(_player.transform.position - transform.position);
 		}
 	}
 
@@ -47,7 +48,7 @@ public class EnemyAttack : MonoBehaviour
 	{
 		_isPlayerInRange = false;
 
-		//TODO: replace with Physics.OverlapSphere or just put a coliider !!!
+		//TODO: replace with Physics.OverlapSphere or just put a coliider
 		Vector3 direction = _player.transform.position - transform.position;
 		float isPlayerInRangeAngle = Vector3.Dot(transform.forward, direction);
 

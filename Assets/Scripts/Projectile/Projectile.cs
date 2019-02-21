@@ -48,13 +48,13 @@ public class Projectile : MonoBehaviour
 		if (other.GetComponent<PlayerHealth>())
 		{
 			other.GetComponent<PlayerHealth>().GetDamage(valueDamage);
-			CreateExplosion();
 		}
-		else if (other.GetComponent<EnemyHealth>())
+		else if (other.GetComponent<Enemy>())
 		{
-			other.GetComponent<EnemyHealth>().GetDamage(valueDamage);
-			CreateExplosion();
+			other.GetComponent<Enemy>().GetDamage(valueDamage);
 		}
+
+		CreateExplosion();
 	}
 
 	private void OnCollisionEnter(Collision col)
@@ -75,6 +75,7 @@ public class Projectile : MonoBehaviour
 			}
 		}
 
+		//TODO: use Object pooling here
 		Destroy(gameObject);
 	}
 }

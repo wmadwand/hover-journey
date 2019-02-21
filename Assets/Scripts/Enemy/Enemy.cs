@@ -14,6 +14,14 @@ public class Enemy : MonoBehaviour
 
 	//--------------------------------------------------------
 
+	public void GetDamage(int value)
+	{
+		health.GetDamage(value);
+		healthBar.UpdateState(health.Value);
+	}
+
+	//--------------------------------------------------------
+
 	private void Awake()
 	{
 		health = GetComponent<EnemyHealth>();
@@ -28,8 +36,10 @@ public class Enemy : MonoBehaviour
 	{
 		if (health.IsAlive) return;
 
+		//TODO: use Object pooling here
 		Destroy(gameObject);
 		Destroy(_poiGo);
+		Destroy(healthBar.gameObject);
 	}
 
 	private void SpawnPOI()
