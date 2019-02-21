@@ -22,7 +22,7 @@ public class PointOfInterest : MonoBehaviour
 	{
 		this._markPoint = targetPivotPoint;
 
-		playerTr = Game.Instance.Player.transform;
+		playerTr = Game.Instance.playerCameraGO.transform;
 		//SetText();
 		//SetColor();
 	}
