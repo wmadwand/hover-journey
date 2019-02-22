@@ -291,7 +291,7 @@ MonoBehaviour:
   - {fileID: 1111989220}
   _enemyPrefab: {fileID: 3317057338954056275, guid: bbf42969a14fc1a4c9855bbfc5781312,
     type: 3}
-  enemiesCount: 1
+  enemiesCount: 4
 --- !u!1 &204661786
 GameObject:
   m_ObjectHideFlags: 0
@@ -1280,7 +1280,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &883800626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1918,8 +1918,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasTr: {fileID: 2102065504}
-  playerCameraGO: {fileID: 883800625}
-  _player: {fileID: 883800625}
+  playerCameraGO: {fileID: 1863495306}
+  _player: {fileID: 835732755}
 --- !u!1 &1309167499
 GameObject:
   m_ObjectHideFlags: 0
@@ -2583,6 +2583,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e7ee4df08df88c4880f43398f9ad2c2, type: 3}
+--- !u!1 &1863495306 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100004, guid: baec086904791744185aaa07a6cf55c2,
+    type: 3}
+  m_PrefabInstance: {fileID: 397358333}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1913092213
 GameObject:
   m_ObjectHideFlags: 0
@@ -2753,7 +2759,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1961939758
 Transform:
   m_ObjectHideFlags: 0
