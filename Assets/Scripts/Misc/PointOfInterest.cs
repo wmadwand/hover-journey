@@ -60,15 +60,6 @@ public class PointOfInterest : MonoBehaviour
 
 	private void Update()
 	{
-		//if (IsObjectVisible2(GetComponent<Collider2D>()))
-		//{
-		//	Debug.Log("Out!");
-		//}
-		//else
-		//{
-		//	Debug.Log("In!");
-		//}
-
 		UpdateState();
 	}
 

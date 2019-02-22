@@ -10,9 +10,11 @@ public class EnemyAttack : MonoBehaviour
 	private WeaponController _weaponController;
 
 	const float ATTACK_DISTANCE = 10;
-	const float FIELD_VIEW_VALUE = .25f;
+	const float FIELD_VIEW_VALUE = .9f;
 
 	private GameObject _player;
+
+	public GameObject tarrget;
 
 	//--------------------------------------------------------
 
@@ -32,8 +34,21 @@ public class EnemyAttack : MonoBehaviour
 		_player = Game.Instance.Player;
 	}
 
+	private void FixedUpdate()
+	{
+		//if (Vector3.Distance(transform.position, _player.transform.position) <= ATTACK_DISTANCE)
+		//{
+		//	RotateToPlayer();
+		//}
+	}
+
 	private void Update()
 	{
+		if (Vector3.Distance(transform.position, _player.transform.position) <= ATTACK_DISTANCE)
+		{
+			RotateToPlayer();
+		}
+
 		CheckForPlayerInRange();
 
 		if (Time.time > _nextShotTime && _isPlayerInRange && _player.GetComponent<PlayerHealth>().IsAlive)
@@ -60,5 +75,15 @@ public class EnemyAttack : MonoBehaviour
 				_isPlayerInRange = true;
 			}
 		}
+	}
+
+	void RotateToPlayer()
+	{
+		Vector3 targetDir = _player.transform.position - transform.position;
+		targetDir.y = 0f;
+		Quaternion targetRotation = Quaternion.LookRotation(targetDir, Vector3.up);
+
+		Quaternion newRotation = Quaternion.Lerp(GetComponent<Rigidbody>().rotation, targetRotation, 2 * Time.deltaTime);
+		GetComponent<Rigidbody>().MoveRotation(newRotation);
 	}
 }

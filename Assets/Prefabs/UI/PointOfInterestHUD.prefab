@@ -105,7 +105,7 @@ MonoBehaviour:
   _background: {fileID: 8594896186626304812}
   _text: {fileID: 2732404318197183578}
   _view: {fileID: 7557264776986889989}
-  dist: 15
+  dist: 60
 --- !u!1 &4048822327414933824
 GameObject:
   m_ObjectHideFlags: 0
