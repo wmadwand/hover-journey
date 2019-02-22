@@ -240,6 +240,11 @@ PrefabInstance:
       propertyPath: _markPoint
       value: 
       objectReference: {fileID: 1573029751}
+    - target: {fileID: 3949896729131678652, guid: ed0426dbf6669f24e8f453d889fc2894,
+        type: 3}
+      propertyPath: dist
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed0426dbf6669f24e8f453d889fc2894, type: 3}
 --- !u!1 &354005806
@@ -325,6 +330,9 @@ MonoBehaviour:
   col3d: {fileID: 0}
   image: {fileID: 354005811}
   is2D: 1
+  screenPointTr: {fileID: 0}
+  rect: {fileID: 0}
+  cubeTr: {fileID: 0}
 --- !u!114 &354005810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -770,6 +778,9 @@ MonoBehaviour:
   col3d: {fileID: 1573029748}
   image: {fileID: 0}
   is2D: 0
+  screenPointTr: {fileID: 1587366211}
+  rect: {fileID: 0}
+  cubeTr: {fileID: 1573029751}
 --- !u!65 &1573029748
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -842,6 +853,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!224 &1587366211 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4475999870073072310, guid: ed0426dbf6669f24e8f453d889fc2894,
+    type: 3}
+  m_PrefabInstance: {fileID: 218699119}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2108707005
 GameObject:
   m_ObjectHideFlags: 0
