@@ -31,7 +31,7 @@ public class PlayerAttack : MonoBehaviour
 			if (Physics.Raycast(_ray, out _hit, Mathf.Infinity, 1 << LayerMask.NameToLayer("Shootable")))
 			{
 				_nextShot = Time.time + _timeBetweenAttacks;
-				_weaponController.Fire(_hit.point - transform.position);
+				_weaponController.Fire(_hit.point);
 			}
 		}
 	}

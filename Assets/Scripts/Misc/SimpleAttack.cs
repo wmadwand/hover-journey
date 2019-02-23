@@ -36,7 +36,7 @@ public class SimpleAttack : MonoBehaviour
 
 		if (_isPlayerInRange && Time.time > _nextShotTime)
 		{
-			FireProjectile(_player.transform.position, 5);
+			FireProjectile(_player.transform.position - transform.position, 5);
 		}
 
 	}
@@ -76,8 +76,8 @@ public class SimpleAttack : MonoBehaviour
 		theProjectile = Instantiate(_bullet, /*_shotSpawn.*/transform.position, Quaternion.identity).transform;
 		theProjectile.LookAt(theProjectile.position + fireDirection);
 
-		Vector3 targetDir = _player.transform.position - transform.position;
+		//Vector3 targetDir = _player.transform.position - transform.position;
 
-		theProjectile.GetComponent<Rigidbody>().velocity = targetDir * projectileSpeed;
+		theProjectile.GetComponent<Rigidbody>().velocity = fireDirection * projectileSpeed;
 	}
 }

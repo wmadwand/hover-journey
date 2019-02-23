@@ -50,10 +50,12 @@ public class WeaponController : MonoBehaviour
 		FireProjectile(direction, this.ownerID);
 	}
 
-	public virtual void FireProjectile(Vector3 fireDirection, int ownerID)
+	public virtual void FireProjectile(Vector3 target, int ownerID)
 	{
 		theProjectile = MakeProjectile(this.ownerID);
-		theProjectile.LookAt(theProjectile.position + fireDirection);
+		theProjectile.LookAt(theProjectile.position + target);
+
+		Vector3 fireDirection = target - _shotSpawn.position;
 
 		theProjectile.GetComponent<Rigidbody>().velocity = fireDirection * projectileSpeed;
 	}
@@ -65,7 +67,7 @@ public class WeaponController : MonoBehaviour
 
 	public virtual Transform MakeProjectile(int ownerID)
 	{
-		theProjectile = Instantiate(_projectileGO, _shotSpawn.position, myTransform.rotation).transform;
+		theProjectile = Instantiate(_projectileGO, _shotSpawn.position, Quaternion.identity /*myTransform.rotation*/).transform;
 		_theProjectileGO = theProjectile.gameObject;
 		_theProjectileGO.layer = myLayer;
 

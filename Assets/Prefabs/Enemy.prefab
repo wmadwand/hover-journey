@@ -394,6 +394,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _timeBetweenShots: 1.5
   tarrget: {fileID: 0}
+  _bullet: {fileID: 1581332747921351849, guid: 1efbb53203ec60348a4ac11dd025a620, type: 3}
 --- !u!114 &1071776981462136581
 MonoBehaviour:
   m_ObjectHideFlags: 0

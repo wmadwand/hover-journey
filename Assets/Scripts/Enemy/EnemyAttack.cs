@@ -55,9 +55,9 @@ public class EnemyAttack : MonoBehaviour
 		{
 			_nextShotTime = Time.time + _timeBetweenShots;
 
-			_weaponController.Fire(_player.transform.position - transform.position);
+			_weaponController.Fire(_player.transform.position);
 		}
-	}
+	}	
 
 	private void CheckForPlayerInRange()
 	{
@@ -77,6 +77,7 @@ public class EnemyAttack : MonoBehaviour
 		}
 	}
 
+	//TODO: RotateToObject(VEctor3 position)
 	void RotateToPlayer()
 	{
 		Vector3 targetDir = _player.transform.position - transform.position;
