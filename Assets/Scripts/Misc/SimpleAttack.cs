@@ -47,7 +47,9 @@ public class SimpleAttack : MonoBehaviour
 
 		//TODO: replace with Physics.OverlapSphere or just put a coliider
 		Vector3 direction = _player.transform.position - transform.position;
-		float isPlayerInRangeAngle = Vector3.Dot(transform.forward, direction);
+
+		//Vector3 vect3 = 
+		float isPlayerInRangeAngle = Vector3.Dot(/*transform.TransformDirection(Vector3.forward)*/transform.forward.normalized, direction.normalized);
 
 		if (isPlayerInRangeAngle > FIELD_VIEW_VALUE)
 		{

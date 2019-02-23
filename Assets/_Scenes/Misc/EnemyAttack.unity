@@ -469,6 +469,7 @@ MonoBehaviour:
   _bullet: {fileID: 291950850628614935, guid: 5daa80f6863dd0b499f116bea8d659cf, type: 3}
   _shotSpawn: {fileID: 758507607}
   projectileSpeed: 3
+  _timeBetweenShots: 0.2
 --- !u!54 &593406842
 Rigidbody:
   m_ObjectHideFlags: 0

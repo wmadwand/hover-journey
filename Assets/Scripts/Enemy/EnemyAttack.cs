@@ -9,8 +9,8 @@ public class EnemyAttack : MonoBehaviour
 
 	private WeaponController _weaponController;
 
-	const float ATTACK_DISTANCE = 10;
-	const float FIELD_VIEW_VALUE = .9f;
+	const float ATTACK_DISTANCE = 15;
+	const float FIELD_VIEW_VALUE = .95f;
 
 	private GameObject _player;
 
@@ -65,7 +65,7 @@ public class EnemyAttack : MonoBehaviour
 
 		//TODO: replace with Physics.OverlapSphere or just put a coliider
 		Vector3 direction = _player.transform.position - transform.position;
-		float isPlayerInRangeAngle = Vector3.Dot(transform.forward, direction);
+		float isPlayerInRangeAngle = Vector3.Dot(transform.forward.normalized, direction.normalized);
 
 		if (isPlayerInRangeAngle > FIELD_VIEW_VALUE)
 		{
