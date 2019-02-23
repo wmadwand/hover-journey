@@ -39,7 +39,7 @@ public class WeaponController : MonoBehaviour
 		SetCollider(GetComponent<Collider>());
 	}
 
-	public virtual void Fire(Vector3 direction/*, int ownerID*/)
+	public virtual void Fire(Vector3 target/*, int ownerID*/)
 	{
 		if (ammo <= 0 && !isInfiniteAmmo)
 		{
@@ -47,7 +47,7 @@ public class WeaponController : MonoBehaviour
 		}
 
 		ammo--;
-		FireProjectile(direction, this.ownerID);
+		FireProjectile(target, this.ownerID);
 	}
 
 	public virtual void FireProjectile(Vector3 target, int ownerID)
@@ -56,7 +56,6 @@ public class WeaponController : MonoBehaviour
 		theProjectile.LookAt(theProjectile.position + target);
 
 		Vector3 fireDirection = target - _shotSpawn.position;
-
 		theProjectile.GetComponent<Rigidbody>().velocity = fireDirection * projectileSpeed;
 	}
 

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-	public static event Action OnDie; // send event to Score system and to Spawn system (remove from the active enemy collection)
+	public static event Action<Enemy> OnDie; // send event to Score system and to Spawn system (remove from the active enemy collection)
 
 	[SerializeField] private Transform _markPoint;
 	[SerializeField] private Transform _healthbarPoint;
@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
 	[SerializeField] private GameObject _enemyHealthBarPref;
 
 	EnemyHealth health;
-	public EnemyHealthBar healthBar;
+	public EnemyHealthBar healthBar;	
 
 	//--------------------------------------------------------
 
@@ -39,7 +39,14 @@ public class Enemy : MonoBehaviour
 	{
 		if (health.IsAlive) return;
 
+		OnDie?.Invoke(this);
+
 		//TODO: use Object pooling here
+		DestroyAllEnemyStuff();
+	}
+
+	public void DestroyAllEnemyStuff()
+	{
 		Destroy(gameObject);
 		Destroy(_poiGo);
 		Destroy(healthBar.gameObject);
