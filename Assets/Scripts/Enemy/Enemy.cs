@@ -1,7 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+	public static event Action OnDie; // send event to Score system and to Spawn system (remove from the active enemy collection)
+
 	[SerializeField] private Transform _markPoint;
 	[SerializeField] private Transform _healthbarPoint;
 	private GameObject _poiGo;

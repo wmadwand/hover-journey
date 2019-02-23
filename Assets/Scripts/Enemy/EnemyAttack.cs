@@ -83,7 +83,24 @@ public class EnemyAttack : MonoBehaviour
 		targetDir.y = 0f;
 		Quaternion targetRotation = Quaternion.LookRotation(targetDir, Vector3.up);
 
-		Quaternion newRotation = Quaternion.Lerp(GetComponent<Rigidbody>().rotation, targetRotation, 2 * Time.deltaTime);
+		Quaternion newRotation = Quaternion.Lerp(GetComponent<Rigidbody>().rotation, targetRotation, 2f * Time.deltaTime);
 		GetComponent<Rigidbody>().MoveRotation(newRotation);
 	}
+
+	#region Rotation tricks
+	void RotationTricks()
+	{
+		//Vector3 rot = Quaternion.LookRotation(target.position - transform.position).eulerAngles;
+		//rot.x = rot.z = 0;
+		//transform.rotation = Quaternion.Euler(rot);
+		//// or
+		//Vector3 newtarget = target.position;
+		//newtarget.y = transform.position.y;
+		//transform.LookAt(newtarget);
+		//// or
+		//Vector3 dir = target.position - transform.position;
+		//dir.y = 0;
+		//transform.rotation = Quaternion.LookRotation(dir);
+	} 
+	#endregion
 }
