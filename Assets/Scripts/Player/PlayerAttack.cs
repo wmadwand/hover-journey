@@ -17,6 +17,8 @@ public class PlayerAttack : MonoBehaviour
 
 	int combineLayerAttack;
 
+	const float ATTACK_DISTANCE = 30;
+
 	//--------------------------------------------------------
 
 	private void Awake()
@@ -36,6 +38,11 @@ public class PlayerAttack : MonoBehaviour
 
 			if (Physics.Raycast(_ray, out _hit, Mathf.Infinity, combineLayerAttack))
 			{
+				if (Vector3.Distance(transform.position, _hit.point) >= ATTACK_DISTANCE)
+				{
+					return;
+				}
+
 				_nextShot = Time.time + _timeBetweenAttacks;
 				_weaponController.Fire(_hit.point);
 			}
