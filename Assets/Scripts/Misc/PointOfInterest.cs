@@ -28,6 +28,12 @@ public class PointOfInterest : MonoBehaviour
 		//SetColor();
 	}
 
+	public void InitView(string text, Color color)
+	{
+		SetText(text);
+		SetColor(color);
+	}
+
 	bool IsObjectVisible2(Collider2D col)
 	{
 		var planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
@@ -49,6 +55,7 @@ public class PointOfInterest : MonoBehaviour
 	public void SetColor(Color value)
 	{
 		_background.color = value;
+		_text.color = value;
 	}
 
 	//--------------------------------------------------------

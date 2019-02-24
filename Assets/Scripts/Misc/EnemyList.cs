@@ -31,7 +31,7 @@ public class EnemyList : MonoBehaviour
 			GameObject go = Instantiate(itemPref, parent);
 
 			go.GetComponentInChildren<TextMeshProUGUI>().text = $" Enemy {item.Key.name}";
-			//go.GetComponentInChildren<Text>().color = item.Key.
+			go.GetComponentInChildren<TextMeshProUGUI>().color = item.Key.color;
 
 			items[item.Value] = go;
 

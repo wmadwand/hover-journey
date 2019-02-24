@@ -7,6 +7,9 @@ public class Enemy : MonoBehaviour
 
 	[SerializeField] private Transform _markPoint;
 	[SerializeField] private Transform _healthbarPoint;
+
+	public PointOfInterest Poi { get; private set; }
+
 	private GameObject _poiGo;
 
 	[SerializeField] private GameObject _enemyPoiPrefab;
@@ -28,11 +31,14 @@ public class Enemy : MonoBehaviour
 	private void Awake()
 	{
 		health = GetComponent<EnemyHealth>();
+
+		//TODO: move it back to Start and use coroutine into EnemySpawn.Execute operation for WaitUntil Poi!= null
+		SpawnPOI();
 	}
 
 	private void Start()
 	{
-		SpawnPOI();
+		//SpawnPOI();
 	}
 
 	private void Update()
@@ -55,8 +61,8 @@ public class Enemy : MonoBehaviour
 	private void SpawnPOI()
 	{
 		_poiGo = Instantiate(_enemyPoiPrefab, Game.Instance.canvasTr);
-		PointOfInterest poi = _poiGo.GetComponent<PointOfInterest>();
-		poi.Init(_markPoint);
+		Poi = _poiGo.GetComponent<PointOfInterest>();
+		Poi.Init(_markPoint);
 
 		healthBar = Instantiate(_enemyHealthBarPref, Game.Instance.canvasTr).GetComponent<EnemyHealthBar>();
 		healthBar.Init(_healthbarPoint);
