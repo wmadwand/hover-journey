@@ -16,6 +16,8 @@ public class EnemyAttack : MonoBehaviour
 
 	public GameObject tarrget;
 
+	public GameObject head;
+
 	//--------------------------------------------------------
 
 	#region Debug
@@ -51,13 +53,41 @@ public class EnemyAttack : MonoBehaviour
 
 		CheckForPlayerInRange();
 
-		if (Time.time > _nextShotTime && _isPlayerInRange && _player.GetComponent<PlayerHealth>().IsAlive)
+		if (Time.time > _nextShotTime && _isPlayerInRange && _player.GetComponent<PlayerHealth>().IsAlive && isCastToPlayer())
 		{
 			_nextShotTime = Time.time + _timeBetweenShots;
 
 			_weaponController.Fire(_player.transform.position);
 		}
-	}	
+	}
+
+	bool isCastToPlayer()
+	{
+		RaycastHit hit;
+
+		bool result = false;
+
+		int envLAyer = 1 << LayerMask.NameToLayer("Static");
+		int playerLayer = 1 << LayerMask.NameToLayer("Player");
+		int combineLayerAttack = envLAyer | playerLayer;
+
+		Ray ray = new Ray(head.transform.position, _player.transform.position - head.transform.position);
+
+		Debug.DrawLine(head.transform.position, _player.transform.position, Color.magenta);
+
+		//if (Physics.SphereCast(ray, 0.55f, out hit, ATTACK_DISTANCE, 1 << LayerMask.NameToLayer("Player")))
+		//{
+		if (Physics.Raycast(ray, out hit, Mathf.Infinity, combineLayerAttack))
+		{
+
+			if (hit.collider.gameObject.GetComponent<PlayerHealth>())
+			{
+				result = true;
+			}
+		}
+
+		return result;
+	}
 
 	private void CheckForPlayerInRange()
 	{
@@ -102,6 +132,6 @@ public class EnemyAttack : MonoBehaviour
 		//Vector3 dir = target.position - transform.position;
 		//dir.y = 0;
 		//transform.rotation = Quaternion.LookRotation(dir);
-	} 
+	}
 	#endregion
 }

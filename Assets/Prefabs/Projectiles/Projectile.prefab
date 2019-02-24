@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8625072619659762310}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Helpers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8581047185371462836}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: POIPivotPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1857248112452359993}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 6552735024066198427}
   - component: {fileID: 2336920468467567116}
   - component: {fileID: 774397066403485910}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -198,7 +198,7 @@ GameObject:
   - component: {fileID: 7362273519080605272}
   - component: {fileID: 2959198450566186672}
   - component: {fileID: 8623846083006330041}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -286,7 +286,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9142021605246255492}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: ShotPivotPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

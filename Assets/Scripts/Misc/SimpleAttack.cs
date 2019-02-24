@@ -36,9 +36,35 @@ public class SimpleAttack : MonoBehaviour
 
 		if (_isPlayerInRange && Time.time > _nextShotTime)
 		{
-			FireProjectile(_player.transform.position - transform.position, 5);
+			if (isCastToPlayer())
+			{
+				FireProjectile(_player.transform.position - transform.position, 5);
+
+			}
 		}
 
+	}
+
+	bool isCastToPlayer()
+	{
+		RaycastHit hit;
+
+		bool result = false;
+
+		Ray ray = new Ray(transform.position, _player.transform.position - transform.position);
+
+		Debug.DrawLine(transform.position, _player.transform.position, Color.red);
+
+		if (Physics.SphereCast(ray, 0.55f, out hit, ATTACK_DISTANCE, 1 << LayerMask.NameToLayer("Shootable")))
+		{
+			//if(Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << LayerMask.NameToLayer("Shootable"))) { 
+			if (hit.collider.gameObject.GetComponent<PlayerHealth>())
+			{
+				result = true;
+			}
+		}
+
+		return result;
 	}
 
 	private void CheckForPlayerInRange()
@@ -77,8 +103,6 @@ public class SimpleAttack : MonoBehaviour
 
 		theProjectile = Instantiate(_bullet, /*_shotSpawn.*/transform.position, Quaternion.identity).transform;
 		theProjectile.LookAt(theProjectile.position + fireDirection);
-
-		//Vector3 targetDir = _player.transform.position - transform.position;
 
 		theProjectile.GetComponent<Rigidbody>().velocity = fireDirection * projectileSpeed;
 	}
