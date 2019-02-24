@@ -14,4 +14,9 @@ public class Game : MonoSingleton<Game>
 	public GameObject playerCameraGO;
 
 	[SerializeField] private GameObject _player;
+
+	private void Start()
+	{
+		OnStart?.Invoke();
+	}
 }

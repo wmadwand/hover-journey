@@ -70,7 +70,7 @@ PrefabInstance:
     - target: {fileID: 774397066403485910, guid: b2bee8ce2f79c9e4ba137e40ebaef03e,
         type: 3}
       propertyPath: explosionForce
-      value: 20000
+      value: 40000
       objectReference: {fileID: 0}
     - target: {fileID: 774397066403485910, guid: b2bee8ce2f79c9e4ba137e40ebaef03e,
         type: 3}
