@@ -14,6 +14,8 @@ public struct SpawnPoint
 
 public class EnemySpawn : MonoBehaviour
 {
+	public static event Action OnAllEnemiesDestroy;
+
 	//[SerializeField] private Transform[] _spawnPointss;
 	[SerializeField] private GameObject _enemyPrefab;
 
@@ -37,6 +39,10 @@ public class EnemySpawn : MonoBehaviour
 		if (gameOver)
 		{
 			Debug.Log("Game over");
+
+			OnAllEnemiesDestroy?.Invoke();
+
+			gameOver = false;
 		}
 	}
 
