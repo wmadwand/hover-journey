@@ -1,20 +1,50 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyList : MonoBehaviour
 {
-	public GameObject item;
+	public GameObject itemPref;
+	public Transform parent;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	Dictionary<Enemy, GameObject> items = new Dictionary<Enemy, GameObject>();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	private void Awake()
+	{
+		EnemySpawn.OnEnemiesSpawned += EnemySpawn_OnEnemiesSpawned;
+		Enemy.OnDie += Enemy_OnDie;
+	}
+
+	private void Enemy_OnDie(Enemy obj)
+	{
+		items[obj].GetComponentInChildren<TextMeshProUGUI>().text = $"<s>{items[obj].GetComponentInChildren<TextMeshProUGUI>().text}</s>";
+	}
+
+	private void EnemySpawn_OnEnemiesSpawned(Dictionary<SpawnPoint, Enemy> obj)
+	{
+		ClearAll();
+
+		foreach (var item in obj)
+		{
+			GameObject go = Instantiate(itemPref, parent);
+
+			go.GetComponentInChildren<TextMeshProUGUI>().text = $" Enemy {item.Key.name}";
+			//go.GetComponentInChildren<Text>().color = item.Key.
+
+			items[item.Value] = go;
+
+		}
+	}
+
+	public void ClearAll()
+	{
+		foreach (var item in items)
+		{
+			Destroy(item.Value);
+		}
+
+		items.Clear();
+	}
 }

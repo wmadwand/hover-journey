@@ -39,10 +39,10 @@ public class Enemy : MonoBehaviour
 	{
 		if (health.IsAlive) return;
 
-		OnDie?.Invoke(this);
-
 		//TODO: use Object pooling here
 		DestroyAllEnemyStuff();
+
+		OnDie?.Invoke(this);
 	}
 
 	public void DestroyAllEnemyStuff()

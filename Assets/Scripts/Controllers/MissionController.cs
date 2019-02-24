@@ -5,6 +5,7 @@ using UnityEngine;
 public class MissionController : MonoBehaviour
 {
 	public float countdown = 3;
+	float countdownCount;
 
 	int missionNumber;
 
@@ -16,6 +17,8 @@ public class MissionController : MonoBehaviour
 	{
 		Game.OnStart += Game_OnStart;
 		Game.OnStop += Game_OnStop;
+
+		countdownCount = countdown;
 	}
 
 	private void Game_OnStop()
@@ -35,14 +38,14 @@ public class MissionController : MonoBehaviour
 	{
 		if (gameStart)
 		{
-			countdown -= Time.deltaTime;
+			countdownCount -= Time.deltaTime;
 
-			if (countdown < 0)
+			if (countdownCount < 0)
 			{
-				enemySpawn.Execute();
-
-				countdown = 3;
+				countdownCount = countdown;
 				gameStart = false;
+
+				enemySpawn.Execute();
 			}
 		}
 	}

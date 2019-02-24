@@ -15,6 +15,7 @@ public struct SpawnPoint
 public class EnemySpawn : MonoBehaviour
 {
 	public static event Action OnAllEnemiesDestroy;
+	public static event Action<Dictionary<SpawnPoint, Enemy>> OnEnemiesSpawned;
 
 	//[SerializeField] private Transform[] _spawnPointss;
 	[SerializeField] private GameObject _enemyPrefab;
@@ -87,6 +88,8 @@ public class EnemySpawn : MonoBehaviour
 
 			activeEnemies[point] = _theEnemy.GetComponent<Enemy>();
 		}
+
+		OnEnemiesSpawned?.Invoke(activeEnemies);
 
 	}
 

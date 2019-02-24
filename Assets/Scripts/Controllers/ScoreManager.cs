@@ -30,7 +30,8 @@ public class ScoreManager : MonoSingleton<ScoreManager>
 
 	private void GameController_OnGameStart()
 	{
-		ResetScore();
+		//ResetScore();
+		UpdateText();
 	}
 
 	private void ResetScore()
