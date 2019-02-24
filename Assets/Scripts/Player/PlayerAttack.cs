@@ -15,11 +15,17 @@ public class PlayerAttack : MonoBehaviour
 	private Ray _ray;
 	RaycastHit _hit;
 
+	int combineLayerAttack;
+
 	//--------------------------------------------------------
 
 	private void Awake()
 	{
 		_weaponController = GetComponent<WeaponController>();
+
+		int envLAyer = 1 << LayerMask.NameToLayer("Static");
+		int playerLayer = 1 << LayerMask.NameToLayer("Shootable");
+		combineLayerAttack = envLAyer | playerLayer;
 	}
 
 	private void Update()
@@ -28,7 +34,7 @@ public class PlayerAttack : MonoBehaviour
 		{
 			_ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-			if (Physics.Raycast(_ray, out _hit, Mathf.Infinity, 1 << LayerMask.NameToLayer("Shootable")))
+			if (Physics.Raycast(_ray, out _hit, Mathf.Infinity, combineLayerAttack))
 			{
 				_nextShot = Time.time + _timeBetweenAttacks;
 				_weaponController.Fire(_hit.point);

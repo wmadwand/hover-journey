@@ -75,10 +75,10 @@ public class EnemyAttack : MonoBehaviour
 
 		Debug.DrawLine(head.transform.position, _player.transform.position, Color.magenta);
 
-		//if (Physics.SphereCast(ray, 0.55f, out hit, ATTACK_DISTANCE, 1 << LayerMask.NameToLayer("Player")))
-		//{
-		if (Physics.Raycast(ray, out hit, Mathf.Infinity, combineLayerAttack))
+		if (Physics.SphereCast(ray, 0.55f, out hit, ATTACK_DISTANCE, combineLayerAttack))
 		{
+		//	if (Physics.Raycast(ray, out hit, Mathf.Infinity, combineLayerAttack))
+		//{
 
 			if (hit.collider.gameObject.GetComponent<PlayerHealth>())
 			{

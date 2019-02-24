@@ -41,6 +41,9 @@ public class Projectile : MonoBehaviour
 		{
 			MakeDamage(other);
 		}
+
+		CreateExplosion();
+
 	}
 
 	private void MakeDamage(Collider other)
@@ -52,9 +55,7 @@ public class Projectile : MonoBehaviour
 		else if (other.GetComponent<Enemy>())
 		{
 			other.GetComponent<Enemy>().GetDamage(valueDamage);
-		}
-
-		CreateExplosion();
+		}				
 	}
 
 	private void OnCollisionEnter(Collision col)

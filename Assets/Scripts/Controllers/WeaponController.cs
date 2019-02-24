@@ -32,7 +32,7 @@ public class WeaponController : MonoBehaviour
 	public virtual void Init()
 	{
 		myTransform = transform;
-		myLayer = gameObject.layer;
+		myLayer =/* 1 << LayerMask.NameToLayer("Projectile");*/ gameObject.layer;
 
 		//Reloaded();
 
@@ -78,6 +78,8 @@ public class WeaponController : MonoBehaviour
 		if (parentCollider != null)
 		{
 			Physics.IgnoreCollision(theProjectile.GetComponent<Collider>(), parentCollider);
+			Physics.IgnoreCollision(theProjectile.transform.Find("View/Sphere").GetComponent<Collider>(), parentCollider);
+
 		}
 
 		return theProjectile;

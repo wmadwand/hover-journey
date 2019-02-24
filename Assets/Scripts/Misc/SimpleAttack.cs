@@ -45,6 +45,8 @@ public class SimpleAttack : MonoBehaviour
 
 	}
 
+
+
 	bool isCastToPlayer()
 	{
 		RaycastHit hit;
