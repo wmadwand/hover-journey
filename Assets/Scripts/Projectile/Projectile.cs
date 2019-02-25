@@ -8,15 +8,14 @@ public enum ProjectileOwner
 
 public class Projectile : MonoBehaviour
 {
+	public int damage = 10;
+
+	//TODO: move to another class Explosion
+	[SerializeField] private float _explosionForce = 40000f;
+	[SerializeField] private float _explosionRadius = 5f;
+	[SerializeField] private float _explosionUpwardsRate = .3f;
+
 	private int _ownerID;
-	private Rigidbody playerRb;
-
-	private Vector3 direction;
-
-	public float explosionForce = 50f;/* 300000f;*/
-	public float explosionRadius = 5f;
-
-	public int valueDamage = 10;
 
 	//--------------------------------------------------------
 
@@ -29,49 +28,33 @@ public class Projectile : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		//if (hit.rigidbody != null && !hit.rigidbody.isKinematic)
-		//{
-
-		//if (other.GetComponent<WeaponController>().ownerID == _ownerID)
-		//{
-		//	return;
-		//}
-
-
 		MakeDamage(other);
-
-
 		CreateExplosion();
-
 	}
 
 	private void MakeDamage(Collider other)
 	{
 		if (other.GetComponent<Enemy>())
 		{
-			other.GetComponent<Enemy>().GetDamage(valueDamage);
+			other.GetComponent<Enemy>().GetDamage(damage);
 		}
 		else if (other.GetComponent<IObjectHealth>() != null)
 		{
-			other.GetComponent<IObjectHealth>().GetDamage(valueDamage);
+			other.GetComponent<IObjectHealth>().GetDamage(damage);
 		}
 	}
 
-	private void OnCollisionEnter(Collision col)
-	{
-		CreateExplosion();
-	}
-
+	//TODO: move to another class Explosion
 	private void CreateExplosion()
 	{
-		Collider[] colliders = Physics.OverlapSphere(transform.position, 5f);
+		Collider[] colliders = Physics.OverlapSphere(transform.position, _explosionRadius);
 
 		foreach (Collider hit in colliders)
 		{
 			if (hit && hit.GetComponent<Rigidbody>())
 			{
 				hit.GetComponent<Rigidbody>().isKinematic = false;
-				hit.GetComponent<Rigidbody>().AddExplosionForce(explosionForce, transform.position, explosionRadius, .3f);
+				hit.GetComponent<Rigidbody>().AddExplosionForce(_explosionForce, transform.position, _explosionRadius, _explosionUpwardsRate);
 			}
 		}
 

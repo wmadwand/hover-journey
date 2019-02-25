@@ -2074,8 +2074,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 298508507892711409079cb761f844f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timeBetweenAttacks: 0.5
-  attackDistance: 30
+  _distanceMax: 30
+  _timeBetweenShots: 0.5
 --- !u!114 &835732762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2473,8 +2473,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 298508507892711409079cb761f844f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timeBetweenAttacks: 0
-  attackDistance: 30
+  _distanceMax: 30
+  _timeBetweenShots: 0.5
 --- !u!114 &883800632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3559,7 +3559,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e89280d914ff36478586d603af7d59a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countdown: 3
+  countdown: 1
   enemySpawn: {fileID: 18197707}
 --- !u!1 &1509391879
 GameObject:

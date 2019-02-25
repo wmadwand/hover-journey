@@ -27,6 +27,8 @@ public class WeaponController : MonoBehaviour
 
 	public float projectileSpeed = 10f;
 
+	private Vector3 _fireDirection;
+
 	//--------------------------------------------------------	
 
 	public virtual void Init()
@@ -55,8 +57,8 @@ public class WeaponController : MonoBehaviour
 		theProjectile = MakeProjectile(this.ownerID);
 		theProjectile.LookAt(theProjectile.position + target);
 
-		Vector3 fireDirection = target - _shotSpawn.position;
-		theProjectile.GetComponent<Rigidbody>().velocity = fireDirection * projectileSpeed;
+		_fireDirection = target - _shotSpawn.position;
+		theProjectile.GetComponent<ProjectileMovement>().SetVelocity(_fireDirection * projectileSpeed);
 	}
 
 	public virtual void SetCollider(Collider aCollider)
