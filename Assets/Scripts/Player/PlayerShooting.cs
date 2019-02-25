@@ -8,8 +8,8 @@ public class PlayerShooting : MonoBehaviour
 
 	private float _nextShotTime;
 	private WeaponController _weaponController;
-	private Ray _ray;
-	private RaycastHit _hit;
+	private Ray _shootRay;
+	private RaycastHit _raycastHit;
 	private int _combineLayerAttack;
 
 	//--------------------------------------------------------
@@ -24,17 +24,17 @@ public class PlayerShooting : MonoBehaviour
 	{
 		if (Input.GetButton("Fire1") && Time.time > _nextShotTime)
 		{
-			_ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			_shootRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-			if (Physics.Raycast(_ray, out _hit, Mathf.Infinity, _combineLayerAttack))
+			if (Physics.Raycast(_shootRay, out _raycastHit, Mathf.Infinity, _combineLayerAttack))
 			{
-				if (Vector3.Distance(transform.position, _hit.point) > _distanceMax)
+				if (Vector3.Distance(transform.position, _raycastHit.point) > _distanceMax)
 				{
 					return;
 				}
 
 				_nextShotTime = Time.time + _timeBetweenShots;
-				_weaponController.Fire(_hit.point);
+				_weaponController.Fire(_raycastHit.point);
 			}
 		}
 	}

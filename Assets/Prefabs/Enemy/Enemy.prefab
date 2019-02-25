@@ -202,6 +202,7 @@ GameObject:
   - component: {fileID: 2409143953752215680}
   - component: {fileID: 4510100618132753093}
   - component: {fileID: 3132711078913889967}
+  - component: {fileID: 8984305833308012596}
   - component: {fileID: 1071776981462136581}
   m_Layer: 9
   m_Name: Enemy
@@ -254,7 +255,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &6365964503169058451
 MonoBehaviour:
@@ -300,10 +301,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4854464112d84c845bb13673d397d6d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _barrelPoint: {fileID: 6085758286952007981}
+  _distanceMax: 25
   _timeBetweenShots: 1.5
-  attackDistance: 25
-  tarrget: {fileID: 0}
-  head: {fileID: 6085758286952007981}
 --- !u!114 &3132711078913889967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,6 +323,19 @@ MonoBehaviour:
   _projectileSpeed: 10
   _ammo: 100
   _maxAmmo: 100
+--- !u!114 &8984305833308012596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3317057338954056275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3db426cb28d9564bbe92be7e998f6c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fieldView: 0.95
 --- !u!114 &1071776981462136581
 MonoBehaviour:
   m_ObjectHideFlags: 0

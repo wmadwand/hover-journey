@@ -5,10 +5,12 @@ public class Enemy : MonoBehaviour
 {
 	public static event Action<Enemy> OnDie;
 
+	public PointOfInterest Poi { get; private set; }
+
+
 	[SerializeField] private Transform _markPoint;
 	[SerializeField] private Transform _healthbarPoint;
 
-	public PointOfInterest Poi { get; private set; }
 
 	private GameObject _poiGo;
 
