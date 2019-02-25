@@ -2,89 +2,71 @@
 
 public class WeaponController : MonoBehaviour
 {
-	public int ownerID;
+	[SerializeField] private int _ownerID;
+	[SerializeField] private GameObject _projectileGO;
+	[SerializeField] private Transform _shotSpawn;
+	[SerializeField] private float _projectileSpeed = 10f;
+	[SerializeField] private int _ammo = 100;
+	[SerializeField] private int _maxAmmo = 100;
 
-	public GameObject _projectileGO;
-	public Transform _shotSpawn;
-
-
-	private GameObject _theProjectileGO;
-	private bool isInfiniteAmmo;
-
-	private Transform myTransform;
-
-	private int myLayer;
-
-	private Projectile theProjectileController;
-
-	public int ammo = 100;
-	public int maxAmmo = 100;
-
-	private Collider parentCollider;
-
-	[System.NonSerialized]
-	public Transform theProjectile;
-
-	public float projectileSpeed = 10f;
-
+	private bool _isInfiniteAmmo;
+	private Transform _myTransform;
+	private int _myLayer;
+	private Projectile _theProjectileController;
+	private Collider _parentCollider;
 	private Vector3 _fireDirection;
+	[System.NonSerialized] private Transform _theProjectile;
 
 	//--------------------------------------------------------	
 
 	public virtual void Init()
 	{
-		myTransform = transform;
-		myLayer =/* 1 << LayerMask.NameToLayer("Projectile");*/ gameObject.layer;
-
-		//Reloaded();
+		_myTransform = transform;
+		_myLayer = /*1 << LayerMask.NameToLayer("Projectile");*/ gameObject.layer; //TODO: deal with it
 
 		SetCollider(GetComponent<Collider>());
 	}
 
 	public virtual void Fire(Vector3 target/*, int ownerID*/)
 	{
-		if (ammo <= 0 && !isInfiniteAmmo)
+		if (_ammo <= 0 && !_isInfiniteAmmo)
 		{
 			return;
 		}
 
-		ammo--;
-		FireProjectile(target, this.ownerID);
+		_ammo--;
+		FireProjectile(target, this._ownerID);
 	}
 
 	public virtual void FireProjectile(Vector3 target, int ownerID)
 	{
-		theProjectile = MakeProjectile(this.ownerID);
-		theProjectile.LookAt(theProjectile.position + target);
-
+		_theProjectile = MakeProjectile(this._ownerID);
+		_theProjectile.LookAt(_theProjectile.position + target);
 		_fireDirection = target - _shotSpawn.position;
-		theProjectile.GetComponent<ProjectileMovement>().SetVelocity(_fireDirection * projectileSpeed);
+		_theProjectile.GetComponent<ProjectileMovement>().SetVelocity(_fireDirection * _projectileSpeed);
 	}
 
 	public virtual void SetCollider(Collider aCollider)
 	{
-		parentCollider = aCollider;
+		_parentCollider = aCollider;
 	}
 
 	public virtual Transform MakeProjectile(int ownerID)
 	{
-		theProjectile = Instantiate(_projectileGO, _shotSpawn.position, Quaternion.identity /*myTransform.rotation*/).transform;
-		_theProjectileGO = theProjectile.gameObject;
-		_theProjectileGO.layer = myLayer;
+		_theProjectile = Instantiate(_projectileGO, _shotSpawn.position, Quaternion.identity).transform;
+		_theProjectile.gameObject.layer = _myLayer;
 
-		theProjectileController = theProjectile.GetComponent<Projectile>();
-		theProjectileController.SetOwnerType(ownerID);
+		_theProjectileController = _theProjectile.GetComponent<Projectile>();
+		_theProjectileController.SetOwnerType(ownerID);
 
-		Physics.IgnoreLayerCollision(myTransform.gameObject.layer, myLayer);
+		Physics.IgnoreLayerCollision(_myTransform.gameObject.layer, _myLayer);
 
-		if (parentCollider != null)
+		if (_parentCollider != null)
 		{
-			Physics.IgnoreCollision(theProjectile.GetComponent<Collider>(), parentCollider);
-			Physics.IgnoreCollision(theProjectile.transform.Find("View/Sphere").GetComponent<Collider>(), parentCollider);
-
+			Physics.IgnoreCollision(_theProjectile.GetComponent<Collider>(), _parentCollider);
 		}
 
-		return theProjectile;
+		return _theProjectile;
 	}
 
 	//--------------------------------------------------------
