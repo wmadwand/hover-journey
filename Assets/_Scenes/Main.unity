@@ -371,7 +371,7 @@ MonoBehaviour:
     transform: {fileID: 495746215}
     weight: 0
     color: {r: 0, g: 0, b: 0, a: 1}
-  enemiesCount: 5
+  enemiesCount: 1
 --- !u!1 &30615647
 GameObject:
   m_ObjectHideFlags: 0

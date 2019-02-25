@@ -12,6 +12,20 @@ namespace ZombieMessage
 			Enemy.OnDie += Enemy_OnDie;
 			MissionController.OnCountdown += MissionController_OnCountdown;
 			PlayerHealth.OnDie += PlayerHealth_OnDie;
+			EnemySpawn.OnEnemiesSpawned += EnemySpawn_OnEnemiesSpawned;
+			EnemySpawn.OnAllEnemiesDestroy += EnemySpawn_OnAllEnemiesDestroy;
+		}
+
+		private void EnemySpawn_OnAllEnemiesDestroy()
+		{
+			object[] settings = { ZombieMessageType.Generic, "Mission complete!" };
+			_messageService.OnGetNotified(settings);
+		}
+
+		private void EnemySpawn_OnEnemiesSpawned(System.Collections.Generic.Dictionary<SpawnPoint, Enemy> obj)
+		{
+			object[] settings = { ZombieMessageType.Generic, "Mission start!" };
+			_messageService.OnGetNotified(settings);
 		}
 
 		private void PlayerHealth_OnDie()

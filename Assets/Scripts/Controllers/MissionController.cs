@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 using ZombieMessage;
@@ -75,24 +73,7 @@ public class MissionController : MonoBehaviour
 
 				enemySpawn.Execute();
 
-
-				//object[] settings = { ZombieMessageType.WaveNumberBegan, missionNumber };
-				//_service.OnGetNotified(settings);
-
 			}
 		}
 	}
-
-
-
-	//public void SendFeedMessage(ZombieMessageType type)
-	//{
-	//	if (Mathf.Abs(previousPauseTime - countdownCount) >= 1)
-	//	{
-	//		previousPauseTime = Mathf.RoundToInt(countdownCount);
-
-	//		object[] settings = { type, previousPauseTime };
-	//		_service.OnGetNotified(settings);
-	//	}
-	//}
 }
