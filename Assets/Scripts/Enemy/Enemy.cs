@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-	public static event Action<Enemy> OnDie; // send event to Score system and to Spawn system (remove from the active enemy collection)
+	public static event Action<Enemy> OnDie;
 
 	[SerializeField] private Transform _markPoint;
 	[SerializeField] private Transform _healthbarPoint;
@@ -15,23 +15,19 @@ public class Enemy : MonoBehaviour
 	[SerializeField] private GameObject _enemyPoiPrefab;
 	[SerializeField] private GameObject _enemyHealthBarPref;
 
-	IObjectHealth health;
-	public EnemyHealthBar healthBar;	
+	public EnemyHealthBar healthBar;
 
 	//--------------------------------------------------------
 
-	public void GetDamage(int value)
+	public void UpdateHealthBar(int value)
 	{
-		health.GetDamage(value);
-		healthBar.UpdateState(health.Value);
+		healthBar.UpdateState(value);
 	}
 
 	//--------------------------------------------------------
 
 	private void Awake()
 	{
-		health = GetComponent<IObjectHealth>();
-
 		//TODO: move it back to Start and use coroutine into EnemySpawn.Execute operation for WaitUntil Poi!= null
 		SpawnPOI();
 	}
@@ -41,13 +37,9 @@ public class Enemy : MonoBehaviour
 		//SpawnPOI();
 	}
 
-	private void Update()
+	public void DestroyEnemy()
 	{
-		if (health.IsAlive) return;
-
-		//TODO: use Object pooling here
 		DestroyAllEnemyStuff();
-
 		OnDie?.Invoke(this);
 	}
 

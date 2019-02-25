@@ -83,19 +83,14 @@ public class EnemySpawn : MonoBehaviour
 		{
 			_theEnemy = Instantiate(_enemyPrefab);
 
-
 			SpawnPoint point = GetFreeSpawnPoint();
-
-			//_theEnemy.GetComponent<Enemy>().Poi.InitView(point.name, point.color);
 
 			Enemy enemy = _theEnemy.GetComponent<Enemy>();
 			enemy.Poi.InitView(point.name, point.color);
 
 			_theEnemy.transform.SetPositionAndRotation(point.transform.position, point.transform.rotation);
 
-			activeEnemies[point] = _theEnemy.GetComponent<Enemy>();
-
-			
+			activeEnemies[point] = _theEnemy.GetComponent<Enemy>();			
 		}
 
 		OnEnemiesSpawned?.Invoke(activeEnemies);

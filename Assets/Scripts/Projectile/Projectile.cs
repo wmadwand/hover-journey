@@ -34,14 +34,12 @@ public class Projectile : MonoBehaviour
 
 	private void MakeDamage(Collider other)
 	{
-		if (other.GetComponent<Enemy>())
+		if (other.GetComponent<IObjectHealth>() == null)
 		{
-			other.GetComponent<Enemy>().GetDamage(damage);
+			return;
 		}
-		else if (other.GetComponent<IObjectHealth>() != null)
-		{
-			other.GetComponent<IObjectHealth>().GetDamage(damage);
-		}
+
+		other.GetComponent<IObjectHealth>().GetDamage(damage);
 	}
 
 	//TODO: move to another class Explosion

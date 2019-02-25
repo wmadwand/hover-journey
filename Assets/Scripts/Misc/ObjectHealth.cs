@@ -5,7 +5,7 @@ public class ObjectHealth : MonoBehaviour, IObjectHealth
 	public int Value => _value;
 	public bool IsAlive => _value > 0;
 
-	[SerializeField] private int _value = 100;
+	[SerializeField] protected int _value = 100;
 
 	//--------------------------------------------------------
 
