@@ -6,18 +6,14 @@ public class Enemy : MonoBehaviour
 	public static event Action<Enemy> OnDie;
 
 	public PointOfInterest Poi { get; private set; }
-
+	public EnemyHealthBar healthBar;
 
 	[SerializeField] private Transform _markPoint;
 	[SerializeField] private Transform _healthbarPoint;
-
-
-	private GameObject _poiGo;
-
 	[SerializeField] private GameObject _enemyPoiPrefab;
 	[SerializeField] private GameObject _enemyHealthBarPref;
 
-	public EnemyHealthBar healthBar;
+	private GameObject _poiGo;
 
 	//--------------------------------------------------------
 
