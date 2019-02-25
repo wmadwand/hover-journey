@@ -74,5 +74,5 @@ namespace ZombieMessage
 			_itemUIList.Add(go);
 			_itemUICurrentPivot[go] = 0;
 		}
-	} 
+	}
 }

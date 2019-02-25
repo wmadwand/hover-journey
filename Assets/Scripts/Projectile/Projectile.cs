@@ -37,10 +37,9 @@ public class Projectile : MonoBehaviour
 		//	return;
 		//}
 
-		if (other.GetComponent<ObjectHealth>())
-		{
-			MakeDamage(other);
-		}
+
+		MakeDamage(other);
+
 
 		CreateExplosion();
 
@@ -48,14 +47,14 @@ public class Projectile : MonoBehaviour
 
 	private void MakeDamage(Collider other)
 	{
-		if (other.GetComponent<PlayerHealth>())
-		{
-			other.GetComponent<PlayerHealth>().GetDamage(valueDamage);
-		}
-		else if (other.GetComponent<Enemy>())
+		if (other.GetComponent<Enemy>())
 		{
 			other.GetComponent<Enemy>().GetDamage(valueDamage);
-		}				
+		}
+		else if (other.GetComponent<IObjectHealth>() != null)
+		{
+			other.GetComponent<IObjectHealth>().GetDamage(valueDamage);
+		}
 	}
 
 	private void OnCollisionEnter(Collision col)

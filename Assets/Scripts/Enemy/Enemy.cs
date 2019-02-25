@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour
 	[SerializeField] private GameObject _enemyPoiPrefab;
 	[SerializeField] private GameObject _enemyHealthBarPref;
 
-	EnemyHealth health;
+	IObjectHealth health;
 	public EnemyHealthBar healthBar;	
 
 	//--------------------------------------------------------
@@ -30,7 +30,7 @@ public class Enemy : MonoBehaviour
 
 	private void Awake()
 	{
-		health = GetComponent<EnemyHealth>();
+		health = GetComponent<IObjectHealth>();
 
 		//TODO: move it back to Start and use coroutine into EnemySpawn.Execute operation for WaitUntil Poi!= null
 		SpawnPOI();

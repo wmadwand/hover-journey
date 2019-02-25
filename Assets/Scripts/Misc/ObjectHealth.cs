@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class ObjectHealth : MonoBehaviour
+public class ObjectHealth : MonoBehaviour, IObjectHealth
 {
 	public int Value => _value;
 	public bool IsAlive => _value > 0;
