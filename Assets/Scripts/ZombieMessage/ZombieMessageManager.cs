@@ -11,6 +11,13 @@ namespace ZombieMessage
 		{
 			Enemy.OnDie += Enemy_OnDie;
 			MissionController.OnCountdown += MissionController_OnCountdown;
+			PlayerHealth.OnDie += PlayerHealth_OnDie;
+		}
+
+		private void PlayerHealth_OnDie()
+		{
+			object[] settings = { ZombieMessageType.Generic, "Player is dead" };
+			_messageService.OnGetNotified(settings);
 		}
 
 		private void MissionController_OnCountdown(float obj)

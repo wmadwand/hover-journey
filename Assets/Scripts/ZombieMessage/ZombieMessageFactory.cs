@@ -8,7 +8,8 @@ namespace ZombieMessage
 		WaveFinished,
 		NextWaveCountdown,
 		TeamPlayerDead,
-		BaseUnderAttack
+		BaseUnderAttack,
+		Generic
 	}
 
 	public interface IZombieMessage
@@ -39,6 +40,7 @@ namespace ZombieMessage
 				case ZombieMessageType.NextWaveCountdown: _messages[type] = new NextWaveCountdown(); break;
 				case ZombieMessageType.TeamPlayerDead: _messages[type] = new TeamPlayerDead(); break;
 				case ZombieMessageType.BaseUnderAttack: _messages[type] = new BaseUnderAttack(); break;
+				case ZombieMessageType.Generic: _messages[type] = new Generic(); break;
 				default: break;
 			}
 

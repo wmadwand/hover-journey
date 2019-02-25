@@ -12,7 +12,22 @@ namespace ZombieMessage
 
 		public string GetText()
 		{
-			return $"Fort attacked!!!";
+			return $"Player is dead";
+		}
+	}
+
+	public class Generic : IZombieMessage
+	{
+		private string _text;
+
+		public void Initialize(object[] settings)
+		{
+			_text = (string)settings[1];
+		}
+
+		public string GetText()
+		{
+			return _text;
 		}
 	}
 }
