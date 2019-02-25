@@ -17,7 +17,7 @@ public class PlayerAttack : MonoBehaviour
 
 	int combineLayerAttack;
 
-	const float ATTACK_DISTANCE = 30;
+	public float attackDistance = 30;
 
 	//--------------------------------------------------------
 
@@ -38,7 +38,7 @@ public class PlayerAttack : MonoBehaviour
 
 			if (Physics.Raycast(_ray, out _hit, Mathf.Infinity, combineLayerAttack))
 			{
-				if (Vector3.Distance(transform.position, _hit.point) >= ATTACK_DISTANCE)
+				if (Vector3.Distance(transform.position, _hit.point) >= attackDistance)
 				{
 					return;
 				}

@@ -9,7 +9,7 @@ public class EnemyAttack : MonoBehaviour
 
 	private WeaponController _weaponController;
 
-	const float ATTACK_DISTANCE = 15;
+	public float attackDistance = 25;
 	const float FIELD_VIEW_VALUE = .95f;
 
 	private GameObject _player;
@@ -46,7 +46,7 @@ public class EnemyAttack : MonoBehaviour
 
 	private void Update()
 	{
-		if (Vector3.Distance(transform.position, _player.transform.position) <= ATTACK_DISTANCE)
+		if (Vector3.Distance(transform.position, _player.transform.position) <= attackDistance)
 		{
 			RotateToPlayer();
 		}
@@ -75,7 +75,7 @@ public class EnemyAttack : MonoBehaviour
 
 		Debug.DrawLine(head.transform.position, _player.transform.position, Color.magenta);
 
-		if (Physics.SphereCast(ray, 0.55f, out hit, ATTACK_DISTANCE, combineLayerAttack))
+		if (Physics.SphereCast(ray, 0.55f, out hit, attackDistance, combineLayerAttack))
 		{
 		//	if (Physics.Raycast(ray, out hit, Mathf.Infinity, combineLayerAttack))
 		//{
@@ -100,7 +100,7 @@ public class EnemyAttack : MonoBehaviour
 		if (isPlayerInRangeAngle > FIELD_VIEW_VALUE)
 		{
 			//TODO: sqrMagnitude or collider
-			if (Vector3.Distance(transform.position, _player.transform.position) <= ATTACK_DISTANCE)
+			if (Vector3.Distance(transform.position, _player.transform.position) <= attackDistance)
 			{
 				_isPlayerInRange = true;
 			}

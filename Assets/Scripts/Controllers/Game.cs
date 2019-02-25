@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Game : MonoSingleton<Game>
 {
@@ -15,10 +14,16 @@ public class Game : MonoSingleton<Game>
 
 	[SerializeField] private GameObject _player;
 
+	public void Restart()
+	{
+		SceneManager.LoadScene("Main", LoadSceneMode.Single);
+	}
 
 	private void Awake()
 	{
 		EnemySpawn.OnAllEnemiesDestroy += EnemySpawn_OnAllEnemiesDestroy;
+
+		DontDestroyOnLoad(this.gameObject);
 	}
 
 	private void EnemySpawn_OnAllEnemiesDestroy()
