@@ -12,7 +12,7 @@ namespace ZombieMessage
 
 		public string GetText()
 		{
-			return $"Player {_name} is dead!";
+			return $"Enemy {_name} is destroyed!";
 		}
 	}
 }

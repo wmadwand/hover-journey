@@ -4,8 +4,12 @@ using DG.Tweening;
 
 public class PointOfInterest : MonoBehaviour
 {
+	public string Letter => _text.text;
+
 	public /*[SerializeField] private*/ Transform _markPoint;
 	[SerializeField] private Image _background;
+
+
 	[SerializeField] private Text _text;
 
 	[SerializeField] private GameObject _view;

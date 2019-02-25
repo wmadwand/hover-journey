@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
@@ -9,8 +10,10 @@ public interface IGameFeedSender
 	void SendFeedMessage(ZombieMessageType type);
 }
 
-public class MissionController : MonoBehaviour, IGameFeedSender
+public class MissionController : MonoBehaviour
 {
+	public static event Action<float> OnCountdown;
+
 	public float countdown = 3;
 	float countdownCount;
 
@@ -58,7 +61,12 @@ public class MissionController : MonoBehaviour, IGameFeedSender
 		{
 			countdownCount -= Time.deltaTime;
 
-			SendFeedMessage(ZombieMessageType.NextWaveCountdown);
+			if (Mathf.Abs(previousPauseTime - countdownCount) >= 1)
+			{
+				previousPauseTime = Mathf.RoundToInt(countdownCount);
+
+				OnCountdown?.Invoke(previousPauseTime);
+			}
 
 			if (countdownCount < 0)
 			{
@@ -66,18 +74,25 @@ public class MissionController : MonoBehaviour, IGameFeedSender
 				gameStart = false;
 
 				enemySpawn.Execute();
+
+
+				//object[] settings = { ZombieMessageType.WaveNumberBegan, missionNumber };
+				//_service.OnGetNotified(settings);
+
 			}
 		}
 	}
 
-	public void SendFeedMessage(ZombieMessageType type)
-	{
-		if (Mathf.Abs(previousPauseTime - countdownCount) >= 1)
-		{
-			previousPauseTime = Mathf.RoundToInt(countdownCount);
 
-			object[] settings = { type, previousPauseTime };
-			_service.OnGetNotified(settings);
-		}
-	}
+
+	//public void SendFeedMessage(ZombieMessageType type)
+	//{
+	//	if (Mathf.Abs(previousPauseTime - countdownCount) >= 1)
+	//	{
+	//		previousPauseTime = Mathf.RoundToInt(countdownCount);
+
+	//		object[] settings = { type, previousPauseTime };
+	//		_service.OnGetNotified(settings);
+	//	}
+	//}
 }
