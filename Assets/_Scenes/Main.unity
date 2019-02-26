@@ -2088,13 +2088,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d5bf863b127e2a47859077026a54308, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ownerID: 0
+  _ownerID: 0
   _projectileGO: {fileID: 8824418805349784376, guid: 9a89e1615b4c2814599502a7690498fd,
     type: 3}
   _shotSpawn: {fileID: 713234890}
-  ammo: 100
-  maxAmmo: 100
-  projectileSpeed: 10
+  _projectileSpeed: 10
+  _ammo: 100
+  _maxAmmo: 100
 --- !u!114 &835732763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2487,13 +2487,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d5bf863b127e2a47859077026a54308, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ownerID: 0
+  _ownerID: 0
   _projectileGO: {fileID: 8824418805349784376, guid: 9a89e1615b4c2814599502a7690498fd,
     type: 3}
   _shotSpawn: {fileID: 1599477213}
-  ammo: 100
-  maxAmmo: 100
-  projectileSpeed: 3
+  _projectileSpeed: 10
+  _ammo: 100
+  _maxAmmo: 100
 --- !u!1 &894091434
 GameObject:
   m_ObjectHideFlags: 0
@@ -3559,7 +3559,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e89280d914ff36478586d603af7d59a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countdown: 1
+  countdown: 4
   enemySpawn: {fileID: 18197707}
 --- !u!1 &1509391879
 GameObject:
