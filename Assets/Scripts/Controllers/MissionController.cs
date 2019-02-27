@@ -13,20 +13,18 @@ public class MissionController : MonoBehaviour
 	public static event Action<float> OnCountdown;
 
 	public float countdown = 3;
-	float countdownCount;
 
-	int missionNumber;
-
-	bool gameStart;
-
-	public EnemySpawn enemySpawn;
-
-	ZombieMessageService _service;
+	private float _countdownCount;
+	private int _missionNumber;
+	private bool _gameStart;
+	private EnemySpawn _enemySpawn;
+	private ZombieMessageService _service;
 
 	[Inject]
-	private void Init(ZombieMessageService service)
+	private void Init(ZombieMessageService service, EnemySpawn enemySpawn)
 	{
 		_service = service;
+		_enemySpawn = enemySpawn;
 	}
 
 	private void Awake()
@@ -34,19 +32,19 @@ public class MissionController : MonoBehaviour
 		Game.OnStart += Game_OnStart;
 		Game.OnStop += Game_OnStop;
 
-		countdownCount = countdown;
+		_countdownCount = countdown;
 	}
 
 	private void Game_OnStop()
 	{
-		gameStart = false;
+		_gameStart = false;
 	}
 
 	private void Game_OnStart()
 	{
-		gameStart = true;
+		_gameStart = true;
 
-		++missionNumber;
+		++_missionNumber;
 	}
 
 
@@ -55,23 +53,23 @@ public class MissionController : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if (gameStart)
+		if (_gameStart)
 		{
-			countdownCount -= Time.deltaTime;
+			_countdownCount -= Time.deltaTime;
 
-			if (Mathf.Abs(previousPauseTime - countdownCount) >= 1)
+			if (Mathf.Abs(previousPauseTime - _countdownCount) >= 1)
 			{
-				previousPauseTime = Mathf.RoundToInt(countdownCount);
+				previousPauseTime = Mathf.RoundToInt(_countdownCount);
 
 				OnCountdown?.Invoke(previousPauseTime);
 			}
 
-			if (countdownCount < 0)
+			if (_countdownCount < 0)
 			{
-				countdownCount = countdown;
-				gameStart = false;
+				_countdownCount = countdown;
+				_gameStart = false;
 
-				enemySpawn.Execute();
+				_enemySpawn.Execute();
 
 			}
 		}
