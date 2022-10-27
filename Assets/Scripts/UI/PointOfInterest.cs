@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using DG.Tweening;
+//using DG.Tweening;
 
 public class PointOfInterest : MonoBehaviour
 {
